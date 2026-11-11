@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14201B">
+<script>
+/* ===== PAYWALL: full-course access with a Gumroad license key =====
+   Module 1 is free. Modules 2 to 8, the full prompt library and the certificate need a license key.
+
+   >>> SET 9 Nov 2026 to the published Gumroad product (nzyqi, $39). If the product changes, update both. <<<
+   GUMROAD_PRODUCT_ID: the product_id shown in the "License key" block on the course product's Content page in Gumroad
+     (it looks like 'SDGgCnivv6gTTHfVRfUBxQ=='). It is public and safe to put here. Never put a Gumroad API token or secret here.
+   BUY_URL: the product's Gumroad link, for example 'https://ironmind53.gumroad.com/l/SLUG'.
+   If either is ever reset to a placeholder, the unlock screen shows "Purchase opens soon" and key entry is off on the live site.
+   Local test mode still works: open index.html from disk (file://) or localhost with ?paywall-test=1 and use a key starting TEST-VALID.
+
+   COURSE_PRICE: the single price shown everywhere in the app. Approved 9 Nov 2026: $39 one-time. Must match Gumroad.
+   MAX_DEVICES: 0 means no limit. Set a number (for example 3) to refuse a key once it has been activated on more devices than that. */
+const GUMROAD_PRODUCT_ID='bCfERwqHfK3wGdt53LiBZQ==';  // Gumroad product 'AI at Work by Course King' (permalink nzyqi), set 9 Nov 2026
+const BUY_URL='https://ironmind53.gumroad.com/l/nzyqi';  // Gumroad product link, $39
+const COURSE_PRICE='$39';
+const MAX_DEVICES=0;
+</script>
+<title>AI at Work: Everyday AI Assistant Skills · by Course King</title>
+<meta name="description" content="AI at Work by Course King: a self-paced online course in everyday AI assistant skills. Prompting, writing, research and fact-checking, planning, spreadsheets, privacy and your own AI toolkit, with a test at the end of every module and a certificate of completion (not an accredited qualification).">
+<style>
+:root{--ink:#14201B;--ink2:#1E2E27;--cream:#F4EEE1;--paper:#FBF8F1;--gold:#C8A96A;--gold-d:#9C7F43;--line:rgba(20,32,27,.13);--muted:#56625C;--ok:#2E6B4E;--ok-bg:#E3EFE7;--bad:#9A3B2E;--bad-bg:#F6E3DE;--warn-bg:#F7EBD3;
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;overflow-wrap:break-word;word-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.2;margin:0 0 .5em;font-weight:700;overflow-wrap:break-word;hyphens:auto}
+h1{font-size:clamp(2rem,7vw,3.2rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.45rem,4.6vw,2rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img,svg{max-width:100%}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 18px}
+.wide{max-width:1120px}
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--cream);border-bottom:1px solid rgba(200,169,106,.35)}
+.top .bar{display:flex;align-items:center;gap:12px;min-height:58px;padding-top:6px;padding-bottom:6px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex:1}
+.mono{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:var(--gold);font-size:.95rem}
+.brand-txt{min-width:0;line-height:1.15}
+.brand-txt b{display:block;font-family:var(--serif);font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-txt span{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn{flex:0 0 auto;background:transparent;border:1px solid rgba(244,238,225,.35);border-radius:999px;padding:7px 14px;color:var(--cream);cursor:pointer;font-size:.9rem}
+.menu-btn:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+nav.drawer{display:none;border-top:1px solid rgba(244,238,225,.12);padding:6px 0 12px}
+nav.drawer.open{display:block}
+nav.drawer a,nav.drawer button{display:block;width:100%;text-align:left;padding:11px 2px;text-decoration:none;color:var(--cream);background:none;border:0;border-bottom:1px solid rgba(244,238,225,.08);cursor:pointer;font-size:1rem}
+nav.drawer button.danger{color:#E9B8AE}
+/* hero */
+.hero{background:radial-gradient(1200px 400px at 85% -10%,rgba(200,169,106,.22),transparent 60%),var(--ink);color:var(--cream);padding:42px 0 46px}
+.eyebrow{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
+.byline{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.12rem;margin:-4px 0 18px}
+.hero p.lead{font-size:1.08rem;color:rgba(244,238,225,.88);max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px;padding:0;list-style:none}
+.chips li{border:1px solid rgba(200,169,106,.5);border-radius:999px;padding:5px 12px;font-size:.86rem;color:var(--cream)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:var(--cream);text-decoration:none;cursor:pointer;font-weight:600;text-align:center;max-width:100%}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.hero .btn.ghost{color:var(--cream);border-color:rgba(244,238,225,.5)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.btn-row .btn{flex:1 1 180px}
+.meter{height:8px;border-radius:999px;background:rgba(20,32,27,.12);overflow:hidden}
+.hero .meter{background:rgba(244,238,225,.15)}
+.meter i{display:block;height:100%;background:var(--gold);border-radius:999px;transition:width .4s}
+.meter-label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;font-size:.86rem;margin:0 0 6px}
+section.block{padding:38px 0 8px}
+.section-head{margin-bottom:18px}
+.section-head p{color:var(--muted);max-width:62ch}
+/* module grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}
+a.card{display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
+a.card:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(20,32,27,.45)}
+.mcard-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.num{font-family:var(--serif);font-size:.9rem;color:var(--gold-d);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.badge{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:3px 10px;background:rgba(20,32,27,.07);color:var(--muted);white-space:nowrap}
+.badge.ok{background:var(--ok-bg);color:var(--ok)}
+.badge.prog{background:var(--warn-bg);color:#7A5A1E}
+.card h3{margin-bottom:6px}
+.card p.blurb{color:var(--muted);font-size:.95rem;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.84rem;color:var(--muted);margin:6px 0 12px}
+.dark-card,a.card.dark-card{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+#app{flex:1 0 auto}
+.dark-card p.blurb{color:rgba(244,238,225,.8)}
+.dark-card .num{color:var(--gold)}
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px;margin:0;padding:0;list-style:none}
+.rules li{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:14px 16px;min-width:0}
+.rules b.big{display:block;font-family:var(--serif);font-size:1.6rem;line-height:1.1;color:var(--ink)}
+.rules span{display:block;font-size:.92rem;color:var(--muted)}
+/* page header */
+.phead{background:var(--ink);color:var(--cream);padding:28px 0 30px}
+.phead .crumbs{font-size:.84rem;color:var(--gold);margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px}
+.phead .crumbs a{color:var(--gold)}
+.phead p{color:rgba(244,238,225,.85)}
+.phead h1{font-size:clamp(1.7rem,6vw,2.6rem)}
+.phead .meter{background:rgba(244,238,225,.15);margin-top:14px}
+main{padding-bottom:40px}
+.content{padding-top:26px}
+.content h2{margin-top:1.4em}
+.content h3.sub{font-family:var(--sans);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);margin:1.8em 0 .7em}
+ul.clean,ol.clean{padding-left:1.2em;margin:0 0 1.2em}
+ul.clean li,ol.clean li{margin-bottom:.55em;padding-left:.2em}
+ul.clean li::marker{color:var(--gold-d)}
+ol.clean li::marker{color:var(--gold-d);font-weight:700}
+.objectives{list-style:none;padding:0;margin:0 0 10px}
+.objectives li{position:relative;padding:10px 0 10px 34px;border-bottom:1px solid var(--line)}
+.objectives li::before{content:"";position:absolute;left:4px;top:15px;width:16px;height:16px;border-radius:50%;border:2px solid var(--gold)}
+.lesson-list{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:8px}
+.lesson-list a{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-decoration:none;min-width:0}
+.lesson-list .n{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:.85rem;font-weight:700;background:rgba(20,32,27,.07)}
+.lesson-list .seen .n{background:var(--ok);color:#fff}
+.lesson-list .t{flex:1;min-width:0}
+.lesson-list .go{flex:0 0 auto;color:var(--gold-d);font-weight:700}
+.lesson-list .special{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.lesson-list .special .n{background:var(--gold);color:var(--ink)}
+.lesson-list .special .go{color:var(--gold)}
+.lesson-list .special .t small{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:2px}
+.lesson-list .practice{background:transparent;border-style:dashed}
+.card.locked{opacity:.66}
+.badge.lock{background:rgba(20,32,27,.07);color:var(--muted)}
+.test-end{background:var(--ink);color:var(--cream);border-radius:18px;padding:20px;margin:18px 0 8px}
+.test-end .eb{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.test-end h3{color:var(--cream);margin:.25em 0 .35em}
+.test-end p{margin:0 0 14px;color:rgba(244,238,225,.85)}
+.cert .c-note{font-size:.78rem;line-height:1.5;color:#4A554F;max-width:560px;margin:22px auto 0;padding-top:12px;border-top:1px solid var(--gold);font-style:italic}
+.cert .c-note b{font-style:normal;letter-spacing:.06em;text-transform:uppercase;font-size:.72rem;color:var(--gold-d);display:block;margin-bottom:2px}
+.notice{background:var(--paper);border:1px solid var(--gold);border-radius:14px;padding:14px 16px;margin:16px 0 0}
+.notice b{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);margin-bottom:4px}
+.notice p{margin:0;font-size:.95rem}
+/* lesson blocks */
+.callout{border-radius:14px;padding:14px 16px;margin:0 0 1.2em;background:#EFE6D2;border-left:4px solid var(--gold)}
+.callout.warn{background:var(--bad-bg);border-left-color:var(--bad)}
+.callout.cue{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--ink)}
+.callout b.ct{display:block;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.callout p{margin:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin:0 0 1.4em}
+.tcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.tcard h4{font-family:var(--sans);font-size:1rem;margin:0 0 8px;color:var(--ink)}
+.tcard .hlabel{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:2px}
+.tcard dl{margin:0}
+.tcard dt{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:10px}
+.tcard dd{margin:2px 0 0;font-size:.95rem}
+figure.fig{margin:0 0 1.4em;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
+figure.fig svg{display:block;width:100%;height:auto}
+figure.fig figcaption{font-size:.88rem;color:var(--muted);margin-top:10px}
+.fig-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px;margin-top:12px;font-size:.88rem}
+.fig-legend div{min-width:0}
+.fig-legend b{display:block}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ticks{display:grid;grid-template-columns:25% 35% 1fr auto;font-size:.76rem;color:var(--muted);margin-top:4px}
+.flow{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.flow li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--cream);min-width:0}
+.flow li b.step{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--gold);font-size:.85rem}
+.flow li div{min-width:0}
+.pager{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.pager .btn{flex:1 1 160px}
+.takeaways{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:10px;counter-reset:t}
+.takeaways li{counter-increment:t;display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.takeaways li::before{content:counter(t);flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--ink);font-weight:700;font-size:.85rem}
+/* quiz */
+.qhead{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;font-size:.88rem;color:var(--muted);margin-bottom:8px}
+.qstem{font-family:var(--serif);font-size:1.28rem;line-height:1.35;margin:14px 0 18px}
+.opts{display:grid;gap:10px;margin-bottom:16px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;line-height:1.45;min-width:0}
+.opt .l{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;background:rgba(20,32,27,.07)}
+.opt .tx{flex:1;min-width:0}
+.opt:hover:not([disabled]){border-color:var(--gold)}
+.opt.sel{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.sel .l{background:var(--ink);color:var(--cream)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.right .l{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.wrong .l{background:var(--bad);color:#fff}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.fb.ok{background:var(--ok-bg);border-left:4px solid var(--ok)}
+.fb.no{background:var(--bad-bg);border-left:4px solid var(--bad)}
+.fb.neutral{background:#EFE6D2;border-left:4px solid var(--gold)}
+.fb b{display:block;margin-bottom:4px}
+.fb p{margin:0}
+textarea{width:100%;min-height:120px;border-radius:14px;border:1.5px solid var(--line);background:#fff;padding:12px 14px;font:inherit;font-size:1rem;resize:vertical;margin-bottom:12px}
+input[type=text]{width:100%;border-radius:12px;border:1.5px solid var(--line);background:#fff;padding:12px 14px;font:inherit;min-height:48px}
+.score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:10px 0 18px}
+.ring{flex:0 0 auto;width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:1.9rem;font-weight:700}
+.ring.pass{background:conic-gradient(var(--ok) var(--p),rgba(20,32,27,.1) 0)}
+.ring.fail{background:conic-gradient(var(--bad) var(--p),rgba(20,32,27,.1) 0)}
+.ring span{width:84px;height:84px;border-radius:50%;background:var(--cream);display:grid;place-items:center}
+.score > div:not(.ring){min-width:0;flex:1 1 200px}
+.review{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.review li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.review .rq{font-weight:600;margin-bottom:6px}
+.review .ra{font-size:.94rem}
+.review .ok{color:var(--ok);font-weight:700}
+.review .no{color:var(--bad);font-weight:700}
+.toggle{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;cursor:pointer}
+.toggle input{width:22px;height:22px;flex:0 0 auto;margin-top:2px;accent-color:var(--ink)}
+.timer{position:sticky;top:58px;z-index:10;background:var(--gold);color:var(--ink);font-weight:700;text-align:center;padding:6px 10px;font-size:.92rem}
+.timer.low{background:var(--bad);color:#fff}
+.selfmark{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.selfmark .btn{flex:1 1 120px}
+/* checklist */
+.check{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:8px}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--paper);border:1px solid var(--line);min-width:0}
+.check li i{flex:0 0 auto;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:.8rem;background:rgba(20,32,27,.1)}
+.check li.done i{background:var(--ok);color:#fff}
+.check li div{min-width:0;flex:1}
+/* certificate */
+.cert{background:#FFFDF8;color:var(--ink);border-radius:6px;padding:10px;margin:20px 0;box-shadow:0 20px 40px -24px rgba(20,32,27,.5)}
+.cert-in{border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:-8px;padding:clamp(22px,6vw,56px) clamp(16px,5vw,48px);text-align:center}
+.cert .mono{margin:0 auto 14px;width:54px;height:54px;font-size:1.3rem;color:var(--gold-d);border-color:var(--gold-d)}
+.cert .c-eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);font-weight:700}
+.cert h2{font-size:clamp(1.6rem,6vw,2.6rem);margin:.3em 0 .4em}
+.cert .c-name{font-family:var(--serif);font-size:clamp(1.6rem,7vw,2.6rem);font-style:italic;border-bottom:1px solid var(--gold);display:inline-block;padding:0 12px 4px;margin:6px 0 14px;max-width:100%}
+.cert .c-course{font-family:var(--serif);font-weight:700;font-size:1.15rem}
+.cert .c-foot{display:flex;flex-wrap:wrap;justify-content:space-around;gap:16px;margin-top:28px;font-size:.9rem}
+.cert .c-foot div{min-width:140px}
+.cert .c-foot b{display:block;font-family:var(--serif);font-size:1.05rem;border-top:1px solid var(--line);padding-top:6px}
+footer.foot{background:var(--ink);color:rgba(244,238,225,.75);padding:26px 0 34px;font-size:.9rem;margin-top:30px}
+footer.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.center{text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ===== about Course King ===== */
+.about-ck{padding:38px 0 8px}
+.about-panel{display:grid;gap:22px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,28px);align-items:center}
+.about-panel{border-left:4px solid var(--gold)}
+.about-id{display:flex;align-items:center;gap:14px;margin-bottom:14px;min-width:0}
+.about-id > div{min-width:0}
+.about-id h2{margin:0}
+.about-id .eyebrow{margin-bottom:4px}
+.about-mono{flex:0 0 auto;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--gold);border:2px solid var(--gold);font-family:var(--serif);font-weight:700;font-size:1.2rem;letter-spacing:.02em}
+.about-copy p{max-width:68ch}
+.about-photo{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--ink);aspect-ratio:4/5;max-width:280px}
+.about-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.about-copy .eyebrow{color:var(--gold-d);margin-bottom:8px}
+.about-copy h2{margin-bottom:.35em}
+.about-copy .tagline{font-family:var(--serif);font-style:italic;color:var(--gold-d);font-size:1.15rem;margin:0 0 14px}
+.about-copy p{color:var(--muted);max-width:58ch}
+.about-copy p:last-child{margin-bottom:0}
+.about-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.about-page .about-hero{display:grid;gap:22px;margin:22px 0 8px}
+.about-page .about-hero{max-width:720px}
+.about-page .about-photo{max-width:100%}
+/* ===== live session ===== */
+.live{background:linear-gradient(180deg,var(--cream),var(--paper))}
+.live-panel{display:grid;gap:26px;background:var(--ink);color:var(--cream);border-radius:24px;padding:clamp(22px,5vw,44px);position:relative;overflow:hidden;background-image:radial-gradient(640px 300px at 100% 0,rgba(200,169,106,.26),transparent 62%),radial-gradient(420px 260px at 0 100%,rgba(200,169,106,.12),transparent 60%)}
+.live-panel h2{color:var(--cream);font-size:clamp(1.6rem,5.4vw,2.4rem);margin-bottom:.4em}
+.live-panel .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.live-panel .eyebrow .ic{width:1.3em;height:1.3em}
+.live-panel p.lede{color:rgba(244,238,225,.88);font-size:1.06rem;max-width:56ch}
+.live-points{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.live-points li{display:flex;gap:12px;align-items:flex-start;background:rgba(244,238,225,.06);border:1px solid rgba(200,169,106,.28);border-radius:16px;padding:14px 16px;min-width:0}
+.live-points li > div{min-width:0}
+.live-points .lp-ic{flex:0 0 auto;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(200,169,106,.18);color:var(--gold)}
+.live-points .lp-ic svg{width:20px;height:20px}
+.live-points b{display:block;color:var(--cream);margin-bottom:2px}
+.live-points span.d{display:block;font-size:.92rem;color:rgba(244,238,225,.75)}
+@media (min-width:900px){.live-points{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.live-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.live-cta .btn{flex:0 1 auto;min-width:min(100%,240px)}
+.live-panel .btn.ghost{color:var(--cream);border-color:rgba(244,238,225,.5)}
+.book-note{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--gold);margin:0}
+.book-note .ic{width:1em;height:1em}
+.book-note.pulse{animation:pulse .6s ease-out}
+@keyframes pulse{0%{opacity:.3}100%{opacity:1}}
+.live-fine{font-size:.82rem;color:rgba(244,238,225,.62);margin:0;max-width:70ch}
+.content .live-points li{background:var(--paper);border-color:var(--line)}
+.content .live-points b{color:var(--ink)}
+.content .live-points span.d{color:var(--muted)}
+.content .live-points .lp-ic{background:var(--sand);color:var(--ink)}
+.book-box{background:var(--ink);color:var(--cream);border-radius:20px;padding:22px;margin:22px 0 6px;background-image:radial-gradient(500px 220px at 100% 0,rgba(200,169,106,.24),transparent 60%)}
+.book-box h3{color:var(--cream);margin:.2em 0 .35em}
+.book-box p{color:rgba(244,238,225,.85)}
+.book-box .eb{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.cert-cta{margin-top:26px}
+.cert-cta h2{color:var(--cream);font-size:clamp(1.45rem,5vw,2rem);margin:.25em 0 .4em}
+.hero-card .hc-live{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:12px 14px;border-radius:14px;background:rgba(200,169,106,.16);border:1px solid rgba(200,169,106,.45);color:var(--cream);text-decoration:none;font-weight:600;font-size:.95rem;transition:background-color .18s}
+.hero-card .hc-live:hover{background:rgba(200,169,106,.26)}
+.hero-card .hc-live .ic{color:var(--gold);width:1.25em;height:1.25em}
+.hero-card .hc-live span{flex:1;min-width:0}
+/* ===== design polish ===== */
+:root{--sand:#E9DFC9;--shadow:0 18px 40px -26px rgba(20,32,27,.55);--r-lg:20px;--r-md:14px}
+.ic{width:1.05em;height:1.05em;flex:0 0 auto;vertical-align:-.16em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn{transition:background-color .18s,border-color .18s,color .18s,transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px -12px rgba(20,32,27,.6)}
+.btn.gold:hover{background:#D4B87D;border-color:#D4B87D}
+.btn .ic{width:1.1em;height:1.1em}
+main.enter{animation:enter .32s ease-out both}
+@keyframes enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* hero */
+.hero{position:relative;overflow:hidden;padding:46px 0 50px;background:radial-gradient(900px 420px at 92% -12%,rgba(200,169,106,.26),transparent 62%),radial-gradient(700px 380px at -10% 110%,rgba(200,169,106,.10),transparent 60%),var(--ink)}
+.hero-grid{display:grid;gap:30px;align-items:center}
+.hero h1{font-size:clamp(2.3rem,9vw,4rem);letter-spacing:-.015em;margin-bottom:.25em}
+.hero .byline{font-size:clamp(1.05rem,3.6vw,1.3rem);margin:0 0 18px}
+.hero p.lead{font-size:clamp(1.06rem,3.4vw,1.22rem);line-height:1.55;margin-bottom:22px;max-width:44ch}
+.hero .rule{width:56px;height:2px;background:var(--gold);margin:0 0 18px;border:0}
+.hero-progress{max-width:520px;margin-bottom:20px}
+.hero .btn-row{max-width:520px}
+.hero-card{background:linear-gradient(160deg,rgba(244,238,225,.07),rgba(244,238,225,.02));border:1px solid rgba(200,169,106,.38);border-radius:var(--r-lg);padding:22px;min-width:0}
+.hero-card .hc-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.hero-card .hc-head svg{width:52px;height:52px;flex:0 0 auto}
+.hero-card .hc-head b{display:block;font-family:var(--serif);font-size:1.15rem;color:var(--cream)}
+.hero-card .hc-head span{display:block;font-size:.82rem;color:rgba(244,238,225,.7)}
+.hc-stats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hc-stats li{border-top:1px solid rgba(200,169,106,.3);padding-top:10px;min-width:0}
+.hc-stats b{display:block;font-family:var(--serif);font-size:1.6rem;line-height:1.1;color:var(--gold)}
+.hc-stats span{display:block;font-size:.84rem;color:rgba(244,238,225,.78)}
+.hero-card .hc-note{margin:16px 0 0;font-size:.82rem;line-height:1.5;color:rgba(244,238,225,.7);display:flex;gap:8px}
+.hero-card .hc-note .ic{color:var(--gold);margin-top:2px}
+@media (min-width:900px){.hero{padding:76px 0 80px}.hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);gap:56px}}
+/* section heads */
+section.block{padding:52px 0 10px}
+.section-head{margin-bottom:24px}
+.section-head .eyebrow{margin-bottom:8px}
+.section-head h2{margin-bottom:.35em}
+/* module cards */
+.grid{gap:18px}
+a.card.mcard{position:relative;padding:22px 22px 18px;border-radius:var(--r-lg);transition:transform .2s,box-shadow .2s,border-color .2s}
+a.card.mcard:hover{border-color:rgba(200,169,106,.7)}
+.mcard .mnum{font-family:var(--serif);font-size:2.3rem;line-height:1;font-weight:700;color:var(--gold);letter-spacing:-.02em}
+.mcard .num{display:block;margin:4px 0 6px;font-size:.78rem}
+.mcard h3{font-size:1.22rem}
+.mcard .meta{gap:6px 14px;margin:8px 0 14px}
+.mcard .meta span{display:inline-flex;align-items:center;gap:5px}
+.mcard .meta .ic{color:var(--gold-d)}
+.mcard .mfoot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:8px}
+.badge{display:inline-flex;align-items:center;gap:5px}
+.badge .ic{width:.95em;height:.95em}
+.card.locked{opacity:1;background:rgba(251,248,241,.55)}
+.card.locked .mnum{color:rgba(156,127,67,.45)}
+.card.locked h3,.card.locked .blurb{color:#7C857F}
+.card.locked .meter{opacity:.45}
+.dark-card{position:relative;overflow:hidden}
+.dark-card::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;border:1px solid rgba(200,169,106,.25);pointer-events:none}
+.xcard .xic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--sand);color:var(--ink);margin-bottom:12px}
+.dark-card .xic{background:rgba(200,169,106,.18);color:var(--gold)}
+.xcard .xic svg{width:22px;height:22px}
+/* rules */
+.rules li{border-radius:var(--r-md);padding:16px 18px}
+.notice{display:flex;gap:12px;align-items:flex-start;border-radius:var(--r-md);padding:16px 18px;background:linear-gradient(180deg,#FFFDF8,var(--paper))}
+.notice > svg{width:26px;height:26px;flex:0 0 auto;color:var(--gold-d);margin-top:1px}
+.notice > div{min-width:0}
+/* page header */
+.phead{position:relative;overflow:hidden;background:radial-gradient(700px 260px at 100% 0,rgba(200,169,106,.18),transparent 60%),var(--ink);padding:30px 0 32px}
+.phead .crumbs a{text-decoration:none;border-bottom:1px solid rgba(200,169,106,.4)}
+/* lesson reading */
+.reading{max-width:720px}
+.reading > p,.reading ul.clean,.reading ol.clean{font-size:1.04rem;line-height:1.75}
+.reading > p{margin-bottom:1.15em}
+.reading h3.sub{margin-top:2.2em}
+.lesson-kicker{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.84rem;color:rgba(244,238,225,.75);margin-top:-2px}
+.lesson-kicker span{display:inline-flex;align-items:center;gap:6px}
+.lesson-kicker .ic{color:var(--gold)}
+/* callouts */
+.callout{border-radius:var(--r-md);padding:16px 18px;background:#F1E8D5}
+.callout b.ct{display:flex;align-items:center;gap:8px;color:var(--ink)}
+.callout b.ct .ic{color:var(--gold-d);width:1.25em;height:1.25em}
+.callout.warn b.ct .ic{color:var(--bad)}
+/* table cards */
+.tcard{border-radius:var(--r-md);padding:0;overflow:hidden;box-shadow:0 1px 0 rgba(20,32,27,.04)}
+.tcard .th{background:var(--ink);color:var(--cream);padding:12px 16px}
+.tcard .th .hlabel{color:var(--gold)}
+.tcard h4{color:var(--cream);font-family:var(--serif);font-size:1.06rem;margin:0}
+.tcard dl{padding:4px 16px 14px}
+.tcard dt{color:var(--gold-d)}
+.tcard dd{line-height:1.55}
+.tcard dd + dt{border-top:1px solid var(--line);padding-top:10px}
+/* lesson list */
+.lesson-list a{transition:border-color .18s,background-color .18s,transform .18s}
+.lesson-list a:hover{border-color:rgba(200,169,106,.75)}
+.lesson-list .n .ic{width:15px;height:15px}
+.lesson-list .go .ic{width:18px;height:18px}
+.lesson-list .special{padding:16px;box-shadow:var(--shadow)}
+/* module test intro + end panel */
+.test-end{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:24px;background:radial-gradient(500px 200px at 100% 0,rgba(200,169,106,.22),transparent 60%),var(--ink)}
+.test-end .eb{display:flex;align-items:center;gap:8px}
+.test-hero{border-radius:var(--r-lg);background:var(--paper);border:1px solid var(--line);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.tstats{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px}
+.tstats li{background:var(--cream);border-radius:var(--r-md);padding:14px 16px;min-width:0}
+.tstats .ic{color:var(--gold-d);width:22px;height:22px;display:block;margin-bottom:6px}
+.tstats b{display:block;font-family:var(--serif);font-size:1.5rem;line-height:1.1}
+.tstats span{display:block;font-size:.86rem;color:var(--muted)}
+.test-hero p{margin:0 0 4px}
+/* results */
+.result-card{border-radius:var(--r-lg);padding:24px;margin:8px 0 18px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.result-card.pass{background:radial-gradient(500px 220px at 100% 0,rgba(200,169,106,.25),transparent 60%),#FFFDF8;border-color:rgba(200,169,106,.6)}
+.result-card .rc-eb{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--gold-d);margin-bottom:6px}
+.result-card.fail .rc-eb{color:var(--bad)}
+.result-card h2{margin:0 0 .3em}
+.result-card .score{margin:14px 0 0}
+.ring{width:118px;height:118px}
+.ring span{width:90px;height:90px;background:#FFFDF8}
+.result-card .btn-row{margin-top:18px}
+/* quiz */
+.opt{transition:border-color .15s,background-color .15s,box-shadow .15s}
+.qstem{font-size:clamp(1.2rem,4.2vw,1.42rem)}
+/* certificate */
+.cert{padding:12px;border-radius:8px;background:#FFFDF8;box-shadow:0 30px 60px -30px rgba(20,32,27,.55)}
+.cert-in{position:relative;border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:-9px;background:radial-gradient(600px 300px at 50% 0,rgba(200,169,106,.12),transparent 70%);padding:clamp(30px,7vw,60px) clamp(18px,6vw,56px)}
+.cert .corner{position:absolute;width:clamp(26px,6vw,44px);height:clamp(26px,6vw,44px);color:var(--gold-d)}
+.cert .corner.tl{top:14px;left:14px}.cert .corner.tr{top:14px;right:14px;transform:scaleX(-1)}
+.cert .corner.bl{bottom:14px;left:14px;transform:scaleY(-1)}.cert .corner.br{bottom:14px;right:14px;transform:scale(-1,-1)}
+.cert-in{padding-bottom:clamp(54px,9vw,66px)}
+.cert .seal{display:block;width:clamp(58px,15vw,78px);height:auto;margin:0 auto 12px}
+.cert .c-kicker{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);font-weight:700}
+.cert h2{font-size:clamp(1.7rem,6.4vw,2.8rem);margin:.25em 0 .55em;letter-spacing:.01em}
+.cert .c-to{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+.cert .c-name{margin:8px 0 16px}
+.cert .c-body{max-width:520px;margin:0 auto 6px}
+.cert .c-foot div{min-width:150px}
+.congrats{display:flex;align-items:center;gap:14px}
+.congrats svg{width:48px;height:48px;flex:0 0 auto}
+.congrats > div{min-width:0}
+/* ===== paywall ===== */
+.pw-done{display:flex;gap:10px;align-items:center;background:var(--ok-bg);color:var(--ok);border-radius:var(--r-md);padding:12px 16px;margin:0 0 16px;font-weight:600}
+.pw-done span{min-width:0}
+.pw-card{position:relative;overflow:hidden;background:radial-gradient(520px 240px at 100% 0,rgba(200,169,106,.26),transparent 60%),var(--ink);color:var(--cream);border-radius:var(--r-lg);padding:24px 22px;margin:0 0 18px;box-shadow:var(--shadow)}
+.pw-card .eb{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.pw-card h2{color:var(--cream);margin:.35em 0 .7em}
+.pw-list{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:12px}
+.pw-list li{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.pw-list .pi{flex:0 0 auto;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(200,169,106,.18);color:var(--gold)}
+.pw-list .pi .ic{width:19px;height:19px}
+.pw-list .pt{min-width:0;color:rgba(244,238,225,.85);font-size:.98rem;line-height:1.5;padding-top:6px}
+.pw-list .pt b{color:var(--cream)}
+.pw-buy{width:100%;max-width:400px}
+.pw-card .pw-have{width:100%;max-width:400px;margin-top:12px;color:var(--cream);border-color:rgba(244,238,225,.5)}
+.pw-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 2px}
+.pw-price .now{font-family:var(--serif);font-size:2.4rem;line-height:1.1;font-weight:700;color:var(--cream)}
+.pw-price .was{font-size:1.2rem;color:rgba(244,238,225,.6);text-decoration-thickness:2px}
+.pw-price .tagl{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink);background:var(--gold);border-radius:999px;padding:3px 10px;line-height:1.4}
+.pw-once{font-size:.88rem;color:rgba(244,238,225,.72);margin:0 0 14px}
+.pw-bundle{margin:20px 0 0;padding:16px 18px;border-radius:var(--r-md);border:1px solid rgba(200,169,106,.45);background:rgba(244,238,225,.06)}
+.pw-bundle .pb-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:6px}
+.pw-bundle .pb-eb{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--cream);min-width:0}
+.pw-bundle .pb-eb .ic{color:var(--gold)}
+.pw-bundle .pb-price{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold)}
+.pw-bundle p{font-size:.92rem;color:rgba(244,238,225,.8);margin:0 0 12px}
+.pw-bundle p:last-child{margin:0}
+.pw-bundle .btn.ghost{color:var(--cream);border-color:rgba(244,238,225,.5);width:100%;max-width:400px}
+.pw-buy.is-soon{cursor:default;background:rgba(200,169,106,.2);border-color:rgba(200,169,106,.55);color:var(--cream)}
+.pw-buy.is-soon:hover{background:rgba(200,169,106,.2);border-color:rgba(200,169,106,.55)}
+.pw-note{font-size:.86rem;color:rgba(244,238,225,.72);margin:10px 0 0;max-width:60ch}
+.pw-key{background:#FFFDF8;border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;margin:0 0 18px;box-shadow:var(--shadow)}
+.pw-key h3{margin:0 0 .3em}
+.pw-key > p{margin:0 0 14px}
+.pw-row{display:flex;flex-wrap:wrap;gap:10px}
+.pw-row input[type=text]{flex:1 1 230px;min-width:0;width:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;letter-spacing:.02em}
+.pw-row input[type=text]:disabled{background:#F3EEE3;color:var(--muted)}
+.pw-row input.bad{border-color:var(--bad)}
+.pw-row .btn{flex:1 1 130px}
+.pw-row .btn[disabled]{opacity:.6;cursor:default}
+.pw-status{display:flex;gap:8px;align-items:flex-start;margin:12px 0 0;font-size:.94rem;line-height:1.5}
+.pw-status:empty{display:none}
+.pw-status > span{min-width:0}
+.pw-status .ic{margin-top:.22em}
+.pw-status.err{color:var(--bad)}
+.pw-status.ok{color:var(--ok);font-weight:600}
+.pw-status.info,.pw-status.busy{color:var(--muted)}
+.spin{display:inline-block;flex:0 0 auto;width:1em;height:1em;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin .8s linear infinite;vertical-align:-.15em}
+.pw-status .spin{margin-top:.22em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pw-keybox{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.95rem;background:#fff;border:1px dashed var(--gold);border-radius:12px;padding:12px 14px;word-break:break-all;margin:8px 0 10px}
+.badge.pay{background:var(--sand);color:var(--ink)}
+/* ===== AI at Work: prompts, before/after, checklists, builder, toolkit ===== */
+.prompt{background:#FFFDF8;border:1px solid var(--line);border-radius:var(--r-md);margin:0 0 1.2em;overflow:hidden;box-shadow:0 1px 0 rgba(20,32,27,.04)}
+.pr-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px 9px 16px;background:var(--ink);color:var(--cream)}
+.pr-t{font-weight:700;font-size:.92rem;min-width:0;line-height:1.35}
+.copy{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid rgba(200,169,106,.6);background:rgba(200,169,106,.16);color:var(--cream);font-size:.84rem;font-weight:600;cursor:pointer}
+.copy .ic{width:15px;height:15px}
+.copy.done{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.copy[disabled]{opacity:.45;cursor:default}
+.copy:focus-visible,.chip:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pr-body{margin:0;padding:14px 16px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.6;color:var(--ink)}
+.pr-body mark{background:#F3E3BC;color:var(--ink);border-radius:4px;padding:0 2px}
+.ba{margin:0 0 1.3em;display:grid;gap:8px}
+.ba-row{border-radius:var(--r-md);padding:12px 14px 12px 16px;min-width:0}
+.ba-row.bad{background:var(--bad-bg);border-left:4px solid var(--bad)}
+.ba-row.good{background:var(--ok-bg);border-left:4px solid var(--ok)}
+.ba-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.ba-tag{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.ba-row.bad .ba-tag{color:var(--bad);margin-bottom:4px}
+.ba-row.good .ba-tag{color:var(--ok)}
+.ba-tag .ic{width:15px;height:15px}
+.ba-x{margin:0;white-space:pre-wrap;font-size:.97rem;line-height:1.6}
+.ba-row.good .copy{background:#fff;color:var(--ok);border-color:rgba(46,107,78,.45)}
+.ba-row.good .copy.done{background:var(--ok);color:#fff}
+.ba-why{margin:2px 2px 0;font-size:.92rem;color:var(--muted)}
+.checklist{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:var(--r-md);padding:14px 16px;margin:0 0 1.3em}
+.ck-head{display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;margin-bottom:6px}
+.ck-head b{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;min-width:0}
+.ck-head b .ic{color:var(--ok);width:1.2em;height:1.2em;flex:0 0 auto}
+.ck-count{font-size:.8rem;font-weight:700;color:var(--muted);background:rgba(20,32,27,.07);border-radius:999px;padding:2px 10px;white-space:nowrap}
+.checklist.all .ck-count{background:var(--ok-bg);color:var(--ok)}
+.checklist ul{list-style:none;margin:0;padding:0}
+.checklist li{border-top:1px solid var(--line)}
+.checklist li:first-child{border-top:0}
+.checklist label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;line-height:1.5}
+.checklist input{flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;accent-color:var(--ok)}
+.checklist label span{min-width:0}
+.checklist input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(20,32,27,.35)}
+.builder{background:#FFFDF8;border:1px solid rgba(200,169,106,.6);border-radius:var(--r-lg);padding:clamp(16px,4vw,22px);margin:0 0 1.4em;box-shadow:var(--shadow)}
+.bd-head h3{margin:.3em 0 .2em}
+.bd-head p{color:var(--muted);font-size:.95rem;margin:0 0 12px}
+.bd-eb{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--gold-d)}
+.bd-f{margin:0 0 12px}
+.bd-f label{display:block;margin-bottom:6px;line-height:1.35}
+.bd-f label b{display:block;font-size:.98rem}
+.bd-f label span{display:block;font-size:.86rem;color:var(--muted)}
+.bd-f textarea{min-height:50px;margin:0;font-size:16px;line-height:1.45;resize:none;overflow:hidden}
+.bd-f input[type=text]{font-size:16px}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 16px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;min-height:36px;font-size:.84rem;cursor:pointer;color:var(--ink);max-width:100%;text-align:left}
+.chip:hover{border-color:var(--gold)}
+.bd-out{margin-bottom:12px}
+.bd-out .pr-body{min-height:64px}
+.bd-actions{display:flex;flex-wrap:wrap;gap:10px}
+.bd-actions .btn{flex:1 1 160px;min-height:42px;font-size:.92rem}
+.tk-group{margin:22px 0 0}
+.tk-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:1.15rem;margin-bottom:12px}
+.tk-n{font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);font-weight:700}
+.tk-lock{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;background:var(--paper);border:1px dashed rgba(20,32,27,.25);border-radius:var(--r-md);padding:12px 14px}
+.tk-lock > svg{width:20px;height:20px;color:var(--gold-d);flex:0 0 auto}
+.tk-lock > span{flex:1 1 180px;min-width:0;font-size:.95rem}
+.tk-lock .btn{min-height:38px;padding:6px 16px;font-size:.9rem}
+@media (min-width:900px){body{font-size:18px}}
+@media print{
+ body{background:#fff}
+ .top,footer.foot,.no-print,.phead,.timer{display:none!important}
+ .cert{box-shadow:none;margin:0}
+ .cert-in{padding:40px 70px 64px}
+ main.enter{animation:none}
+ main .wrap{max-width:100%;padding:0}
+ .cert .c-note{color:#333}
+ .cert,.cert-in{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ main{padding:0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="wrap wide bar">
+  <a class="brand" href="#/"><span class="mono" aria-hidden="true">AI</span><span class="brand-txt"><b>AI at Work</b><span>by Course King</span></span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">Menu</button>
+ </div>
+ <nav class="drawer wrap wide" id="drawer" aria-label="Course menu">
+  <a href="#/">Home</a>
+  <a href="#/about">About Course King</a>
+  <a href="#/modules">All modules</a>
+  <a href="#/toolkit">Prompt toolkit</a>
+  <a href="#/unlock" id="navUnlock">Unlock the full course</a>
+  <a href="#/key" id="navKey">I have a license key</a>
+  <a href="#/certificate">Certificate</a>
+  <button class="danger" id="resetBtn" type="button">Reset my progress</button>
+ </nav>
+</header>
+<div id="app"></div>
+<footer class="foot"><div class="wrap wide"><span>© Course King · @cours.eking</span><span>AI at Work · an independent course by Course King, not affiliated with any AI company</span></div></footer>
+<script>
+const DATA = {"modules": [{"id": "basics", "title": "AI Assistants: What They Can and Can’t Do", "short": "The basics", "hours": 0.75, "blurb": "How AI assistants work in plain English, where they shine and where they slip, plus the four-part prompt formula and ten prompts you can use today.", "objectives": ["Explain in plain words how an AI assistant writes its answers.", "Name the jobs AI assistants do well and the ones that need careful checking.", "Write a clear prompt with the four-part formula: role, task, context and format.", "Use ten ready-made prompts to save time this week."], "intro": "No technical background is needed. Open any AI assistant in another tab or app (a free version is fine) so you can try each idea as you go.", "lessons": [{"title": "What an AI assistant actually is", "blocks": [{"t": "p", "x": "AI assistants such as ChatGPT, Gemini, Claude, Copilot and Grok are built on **large language models**: software trained on huge amounts of text to predict which words are likely to come next. When you send a message, the assistant writes its reply piece by piece, based on the patterns it learned and on everything you have given it in the conversation."}, {"t": "p", "x": "That one idea explains most of what you will see. Assistants are excellent with language: drafting, rewriting, summarising, explaining, brainstorming and organising. They can also be confidently wrong, because a fluent, well-written sentence is not the same thing as a checked fact."}, {"t": "h", "x": "What many assistants can do today"}, {"t": "ul", "items": ["**Files**: read documents, PDFs and spreadsheets that you upload.", "**Images**: describe photos and screenshots, and create new images.", "**Web search**: look things up and show their sources (in some tools and modes).", "**Voice**: hold a spoken conversation or take dictation.", "**Memory**: remember your preferences across chats, when that feature is on."]}, {"t": "callout", "title": "Features vary, skills don’t", "x": "Tools change often, and free and paid plans differ. This course teaches skills that work in any assistant. If a feature mentioned here is missing from yours, check its help pages or settings.", "kind": "cue"}, {"t": "p", "x": "This course names popular assistants only as examples. It is independent and is not affiliated with or endorsed by any AI company."}]}, {"title": "Where AI helps, and where it doesn’t", "blocks": [{"t": "p", "x": "The quickest way to get value from AI is to give it the right jobs. Think of it as a fast, keen assistant who has read a lot but checked very little."}, {"t": "h", "x": "Great jobs to hand over"}, {"t": "ul", "items": ["First drafts of emails, messages, posts and documents.", "Summaries of long text that **you** provide.", "Turning messy notes into lists, plans and tables.", "Explaining a topic at your level, then quizzing you on it.", "Brainstorming ideas, names, headlines and angles.", "Rewriting for tone, length or reading level.", "Spreadsheet formulas, explained step by step."]}, {"t": "h", "x": "Use with care, and check every time"}, {"t": "ul", "items": ["**Facts and figures**: names, dates, numbers, quotes and sources can be wrong or invented.", "**Recent events**: an assistant only knows what was in its training data, which stops at a cut-off date, unless it searches the web.", "**Maths in its head**: ask for a formula or for the working to be shown, then check it.", "**Legal, medical, money and tax questions**: useful for preparing your questions, not as the final answer. Ask a qualified professional."]}, {"t": "h", "x": "Keep for yourself"}, {"t": "ul", "items": ["Final decisions, especially decisions about people.", "Anything you cannot check before you use it.", "Private or confidential information (Module 7 shows you what not to paste)."]}, {"t": "callout", "title": "The golden rule", "x": "You are the editor, not the audience. AI drafts; you decide what is true, what is right and what gets sent.", "kind": "tip"}]}, {"title": "The four-part prompt formula", "blocks": [{"t": "p", "x": "A **prompt** is the message you give the assistant. Vague in, vague out: most disappointing answers come from prompts that leave the assistant guessing. The fix is a simple formula with four parts."}, {"t": "cards", "hdr": ["Part", "What it does", "Example"], "rows": [["Role", "Tells the assistant whose point of view or expertise to use.", "“You are an experienced office manager.”"], ["Task", "The job itself, starting with a clear verb.", "“Write a short email asking the team to send their timesheets by Thursday.”"], ["Context", "The facts it cannot guess: who it is for, the background, the goal.", "“The team is 12 people, some are new, and several were late last month. Keep it friendly, not a telling-off.”"], ["Format", "The shape of the answer: length, structure and tone.", "“Under 120 words, with a subject line and the steps as a short bullet list.”"]]}, {"t": "ba", "bad": "Write an email about timesheets.", "good": "You are an experienced office manager. Write a short email asking the team to send their timesheets by Thursday. The team is 12 people, some are new, and several were late last month, so keep it friendly, not a telling-off. Under 120 words, with a subject line and the steps as a short bullet list.", "why": "The stronger prompt answers the questions the assistant would otherwise guess: who is writing, for whom, why, and in what shape."}, {"t": "p", "x": "You do not need all four parts every time. For a quick question, the task alone is fine. When the answer matters, add the other three."}, {"t": "callout", "title": "Remember it as R-T-C-F", "x": "Role, Task, Context, Format. If an answer disappoints you, check which of the four was missing, add it, and ask again.", "kind": "tip"}]}, {"title": "Try it: build your first prompt", "blocks": [{"t": "p", "x": "Use the prompt builder below. Fill in each box, copy the finished prompt, and paste it into your assistant. Pick a real task from your week, such as a message you need to send or a plan you need to make."}, {"t": "builder"}, {"t": "p", "x": "When the answer arrives, read it properly, then ask for one improvement, for example “Make it shorter”, “Make it warmer” or “Give me two other versions”. Improving an answer with a follow-up is a skill in itself, and Module 2 goes deeper."}, {"t": "check", "id": "m1-first", "title": "Your first prompt", "items": ["I gave the assistant a role.", "My task starts with a clear verb.", "I added context it could not have guessed.", "I said what format I wanted.", "I read the answer and asked for one improvement.", "I checked any names, dates and numbers before using it."]}]}, {"title": "10 prompts that save time this week", "blocks": [{"t": "p", "x": "Copy any prompt below, replace the parts in [square brackets] with your own details, and paste it into your assistant. Every prompt in this course is also in your **Prompt toolkit** (in the menu), so you can find it again later."}, {"t": "callout", "title": "Before you paste anything", "x": "Only paste text your workplace or school allows you to share with an AI tool, and remove names and private details first. Module 7 covers this fully.", "kind": "warn"}, {"t": "prompt", "title": "1. Inbox triage", "x": "Here are [number] emails I need to deal with. For each one, give me a one-line summary, whether it needs a reply, and how urgent it is (high, medium or low). Then suggest the order to handle them in.\n\n[paste the emails, with names and private details removed]"}, {"t": "prompt", "title": "2. Reply drafter", "x": "Draft a reply to the message below. My answer is: [yes / no / your main point]. Tone: [friendly / formal]. Keep it under [80] words.\n\nMessage:\n\"\"\"\n[paste the message]\n\"\"\""}, {"t": "prompt", "title": "3. Meeting notes to actions", "x": "Turn these meeting notes into: 1) a three-sentence summary, 2) a table of action items with owner and deadline, and 3) a list of open questions. Do not add anything that is not in the notes.\n\n\"\"\"\n[paste your notes]\n\"\"\""}, {"t": "prompt", "title": "4. Explain it simply", "x": "Explain [topic] to me as if I am completely new to it. Use plain words and one everyday example, and finish with three questions I could answer to check that I understand."}, {"t": "prompt", "title": "5. Plan my week", "x": "Help me plan my week. My fixed commitments are: [list]. My tasks are: [list, with a rough time for each]. I do my best work in the [mornings / afternoons]. Give me a day-by-day plan with breaks, and flag anything that will not fit."}, {"t": "prompt", "title": "6. Shorter and clearer", "x": "Rewrite the text below so it is clearer and about half the length. Keep every fact and number exactly as written. Then list what you removed.\n\n\"\"\"\n[paste the text]\n\"\"\""}, {"t": "prompt", "title": "7. Spreadsheet formula", "x": "I use [Excel / Google Sheets]. Column A has [dates], column B has [categories] and column C has [amounts]. Write a formula that [adds up the amounts where the category is “Food”]. Explain how it works in plain words."}, {"t": "prompt", "title": "8. Brainstorm", "x": "Give me 15 ideas for [goal], grouped into three themes. Mark the three that are quickest to try, and say why."}, {"t": "prompt", "title": "9. Weigh up a decision", "x": "I am deciding between [option A] and [option B]. What matters most to me is [your priorities]. Compare the options in a table of pros and cons, then ask me three questions that would help me decide. Do not decide for me."}, {"t": "prompt", "title": "10. Quiz me", "x": "Quiz me on [topic] with five questions, one at a time. Wait for my answer before giving feedback, and explain anything I get wrong."}, {"t": "callout", "title": "Check before you use", "x": "These prompts save time on the first draft. Before anything goes out, check names, numbers, dates and promises yourself.", "kind": "cue"}]}], "takeaways": ["AI assistants predict likely text from patterns; fluent does not mean correct.", "Hand over drafting, summarising, organising, explaining and brainstorming.", "Check facts, recent events and maths; use professionals for legal, medical and money decisions.", "Prompt formula: Role, Task, Context, Format (R-T-C-F).", "You are the editor: AI drafts, you decide what is true and what gets sent."], "quiz": [{"q": "How does an AI assistant built on a large language model produce its replies?", "options": ["It looks up each answer in a database of facts that experts have already checked", "It predicts likely next words from patterns in its training text and your conversation", "A team of human experts reads your message and types each reply in real time", "It copies the first web page that matches your question and tidies the wording"], "answer": 1, "explain": "Large language models generate text by predicting what is likely to come next, based on patterns learned in training and on the conversation so far. That is why answers sound fluent but still need checking."}, {"q": "Which job can you most safely hand to an AI assistant?", "options": ["Confirming the exact date of last week’s change to a law", "Giving a final diagnosis for a symptom you have", "Turning your own rough notes into a tidy first draft", "Working out the tax figure you will submit"], "answer": 2, "explain": "Reorganising and drafting from material you provide plays to an assistant’s strengths, and you can easily check the result. Recent legal facts, medical diagnoses and tax figures need reliable sources or a qualified professional."}, {"q": "In the prompt formula, “The team is 12 people, and several were late last month” is an example of which part?", "options": ["Role", "Task", "Context", "Format"], "answer": 2, "explain": "Context gives the assistant facts it cannot guess: the audience, the background and the goal."}, {"q": "“Answer in under 100 words, as a bullet list” is an example of which part of the formula?", "options": ["Role", "Task", "Context", "Format"], "answer": 3, "explain": "Format sets the shape of the answer: length, structure and tone."}, {"q": "Why might an assistant give you out-of-date information about recent news?", "options": ["Its training data stops at a cut-off date, and it may not search the web", "Assistants are deliberately blocked from answering any question about the news", "Your prompt was too short, so it chose an older answer to be safe", "Assistants only update their knowledge once you have paid for a plan"], "answer": 0, "explain": "A model only knows what was in its training data, which stops at a cut-off date. Some assistants can search the web for newer information, but you should still check the sources."}, {"q": "What does “you are the editor, not the audience” mean in practice?", "options": ["Read AI answers for ideas and enjoyment, but never use them for real work", "Let the assistant edit your work, then let it send the final version for you", "Check and decide what is true and what gets used before anything goes out", "Only use AI to edit text you wrote, and never ask it for a first draft"], "answer": 2, "explain": "AI produces drafts. You stay responsible for checking facts, judging what is right and deciding what is sent."}, {"q": "A colleague says, “I asked the AI, so it must be right.” What is the best reply?", "options": ["“True: answers from AI tools are checked by experts before you see them.”", "“AI answers can sound confident and still be wrong, so let’s check the key facts.”", "“Only the paid versions of AI tools are accurate, so it depends which you used.”", "“It is right as long as the answer is long, detailed and sounds professional.”"], "answer": 1, "explain": "Confidence and detail are not proof. Any assistant, free or paid, can make mistakes or invent details, so important facts need checking against a reliable source."}], "num": 1}, {"id": "prompts", "title": "Prompts That Work", "short": "Prompting", "hours": 0.75, "blurb": "Get better answers first time: be specific, show examples, iterate with follow-ups and use five power patterns that work in any assistant.", "objectives": ["Write specific prompts with a clear goal, audience and limits.", "Use examples, templates and clear markers to guide the answer.", "Improve an answer through short, targeted follow-ups.", "Apply five power patterns, from “ask me questions first” to “critique, then improve”."], "intro": "Have your assistant open. Each lesson has prompts to copy and try with a task from your own week.", "lessons": [{"title": "Be specific: goal, audience and limits", "blocks": [{"t": "p", "x": "The more an assistant has to guess, the more generic its answer. Specific prompts name the goal, the audience and the limits."}, {"t": "ul", "items": ["**Goal**: what the result is for. “So my manager can approve it in two minutes.”", "**Audience**: who will read or use it. “For customers who are not technical.”", "**Limits**: length, reading level, words to avoid, spelling style. “Under 150 words, no jargon, UK English.”", "**What to leave out**: “Do not mention prices.” Saying what you do not want is just as useful."]}, {"t": "ba", "bad": "Give me some tips for a presentation.", "good": "I am giving a 10-minute presentation to senior managers next week to ask for budget for a new booking system. Give me 5 tips for making a clear case in a short time. They are busy and sceptical of new software. Keep each tip to two sentences.", "why": "Goal, audience, situation and limits turn generic advice into advice you can use."}, {"t": "callout", "title": "Quick test", "x": "Read your prompt as if you were a new colleague. Would you know exactly what to produce? If not, the assistant will not either.", "kind": "tip"}]}, {"title": "Show, don’t just tell: examples and templates", "blocks": [{"t": "p", "x": "Examples are one of the most reliable ways to get the style you want. Instead of describing a tone, show it."}, {"t": "ul", "items": ["**Give an example**: “Here is a post I liked. Write three more in the same style.”", "**Use your own writing**: paste two or three messages you wrote and ask it to match your tone.", "**Give a template**: provide the headings or the structure, and ask it to fill them in.", "**Use clear markers**: put pasted text between triple quotes (\"\"\") or labels such as “Text starts here” and “Text ends here”, so the assistant can tell your instructions apart from the text it should work on."]}, {"t": "prompt", "title": "Match my style", "x": "Here are three messages I have written:\n\"\"\"\n[paste two or three short examples of your writing]\n\"\"\"\nDescribe my writing style in five bullet points. Then use that style to write [what you need]."}, {"t": "prompt", "title": "Fill my template", "x": "Use this exact structure and keep the headings as they are:\n\nSummary:\nWhat happened:\nWhat we will do next:\nWho to contact:\n\nFill it in using these notes:\n\"\"\"\n[paste notes]\n\"\"\""}]}, {"title": "Iterate: the follow-up is where it gets good", "blocks": [{"t": "p", "x": "A first answer is a first draft. Most of the value comes from one or two short follow-ups that steer it towards what you need."}, {"t": "h", "x": "Follow-ups worth memorising"}, {"t": "ul", "items": ["“Make it half the length.”", "“More formal.”", "“Warmer and more casual.”", "“Give me three different versions.”", "“What is missing or unclear?”", "“Keep the first paragraph and rewrite the rest.”", "“Turn this into a table.”", "“Explain your reasoning for point 3.”"]}, {"t": "p", "x": "Be precise about what to change and what to keep. “Better” is vague; “shorter, with the deadline in the first line” is not."}, {"t": "callout", "title": "When to start a fresh chat", "x": "In a very long conversation, an assistant can lose track of details from early on or keep repeating an approach you have rejected. Start a new chat with one improved prompt that includes everything important. It is often faster than arguing with the old one.", "kind": "cue"}]}, {"title": "Five power patterns", "blocks": [{"t": "p", "x": "These patterns work in any assistant. Each one solves a common problem."}, {"t": "cards", "hdr": ["Pattern", "When to use it", "Add this to your prompt"], "rows": [["Ask me first", "The task depends on details the assistant does not know yet.", "“Before you answer, ask me up to five questions you need answered to do this well.”"], ["Step by step", "Maths, logic or a process with several stages.", "“Work through this step by step and show your working.”"], ["Critique, then improve", "You have a draft and want it stronger.", "“List the three biggest weaknesses in this draft, then rewrite it to fix them.”"], ["Options, not one answer", "You want to choose, not be told.", "“Give me three versions: short, medium and detailed.”"], ["Practise with me", "Rehearsing an interview, a hard conversation or a pitch.", "“Play the role of [person]. Ask me one question at a time and give me feedback at the end.”"]]}, {"t": "prompt", "title": "Ask me first", "x": "I need to [task]. Before you start, ask me up to five questions that would help you do this well. Wait for my answers."}, {"t": "callout", "title": "“If you’re not sure, say so”", "x": "Adding “If you are not sure about something, say so rather than guessing” can reduce made-up answers. It does not remove them, so you still check the facts that matter.", "kind": "warn"}]}, {"title": "Practice: fix the prompt", "blocks": [{"t": "p", "x": "Here are three weak prompts and stronger versions. Before you read each stronger version, try improving the weak one yourself."}, {"t": "ba", "bad": "Summarise this.", "good": "Summarise the report below for my team leader, who has two minutes. Give five bullet points: the main finding, the two biggest risks, the cost, and the decision needed. Use only information from the report.\n\n\"\"\"\n[paste the report]\n\"\"\"", "why": ""}, {"t": "ba", "bad": "Write a LinkedIn post about my new job.", "good": "Write a LinkedIn post announcing that I have started as [job title] at [company]. Thank my previous team at [company] briefly. Tone: warm and professional, not boastful. Under 120 words, no hashtags, no emojis. Give me two versions.", "why": ""}, {"t": "ba", "bad": "Make a workout plan.", "good": "Act as a careful fitness coach. I am a beginner, I have 30 minutes on Monday, Wednesday and Friday, and I train at home with no equipment. Write a simple 4-week plan in a table. Include warm-ups, and tell me when I should check with a doctor first.", "why": "Even health and fitness prompts benefit from context. For medical conditions, injuries or pregnancy, check with a qualified professional before following any plan."}, {"t": "check", "id": "m2-quality", "title": "Prompt quality check", "items": ["The goal and the audience are clear.", "I gave the facts the assistant cannot guess.", "I set limits: length, tone and anything to avoid.", "Pasted text sits between clear markers.", "I planned at least one follow-up to improve the answer."]}]}], "takeaways": ["Specific prompts name the goal, the audience and the limits, including what to leave out.", "Examples and templates beat descriptions; use clear markers around pasted text.", "Treat the first answer as a draft and steer it with precise follow-ups.", "In very long chats, start fresh with one improved prompt.", "Power patterns: ask me first, step by step, critique then improve, options, practise with me."], "quiz": [{"q": "Which prompt is most likely to get a useful answer first time?", "options": ["“Help with my presentation, please. Make it really good and very professional.”", "“Presentation tips please. I want the best possible tips you can think of.”", "“Give 5 tips for a 10-minute budget pitch to busy, sceptical managers, two sentences each.”", "“Make my presentation better. Use your expertise and be as detailed as you can.”"], "answer": 2, "explain": "It states the situation, the audience, the goal and the limits, so the assistant has far less to guess."}, {"q": "What is the main benefit of pasting a few messages you wrote yourself?", "options": ["It makes the assistant work faster", "The assistant can match your tone and style", "It stops the assistant from making factual mistakes", "It is required before an assistant will write anything"], "answer": 1, "explain": "Examples are one of the most reliable ways to show the style you want. They do not make facts more accurate."}, {"q": "Why put pasted text between clear markers such as triple quotes?", "options": ["It encrypts the pasted text so that the AI company cannot store or read it", "It tells the assistant to give a longer and more detailed answer than usual", "It helps the assistant tell your instructions apart from the text to work on", "It is the only way most assistants will accept text that you have pasted in"], "answer": 2, "explain": "Markers separate “what to do” from “what to do it to”. They offer no privacy protection."}, {"q": "The first draft is too long and too formal. What is the best next step?", "options": ["Send it anyway; AI knows best", "Type the same prompt again and hope for a different result", "Reply: “Make it half the length and more casual.”", "Close the app and write it from scratch"], "answer": 2, "explain": "A short, precise follow-up is usually the fastest route to what you need."}, {"q": "A long chat has started ignoring instructions you gave at the start. What is the sensible move?", "options": ["Keep repeating the instruction in capital letters until the assistant follows it", "Start a new chat with one improved prompt that includes the key details", "Delete your earlier messages so the assistant pays more attention", "Accept that the assistant cannot do this task and do it by hand"], "answer": 1, "explain": "Very long conversations can lose track of early details. A fresh chat with everything important in one prompt often works better."}, {"q": "When is “Before you answer, ask me up to five questions” most useful?", "options": ["When you want the shortest, quickest possible reply to a simple request", "When the task depends on details the assistant does not know yet", "When you are asking a simple yes-or-no question about a well-known fact", "When you want the assistant to search the web instead of using its training"], "answer": 1, "explain": "Letting the assistant ask questions first fills in the context it would otherwise guess."}, {"q": "What does adding “If you are not sure, say so” do?", "options": ["Guarantees that every answer in the chat is accurate and fully checked", "Can reduce made-up answers, but you still need to check facts", "Makes the assistant refuse any question where it might make a mistake", "Switches on the assistant’s web search so it can confirm its answers"], "answer": 1, "explain": "It is a helpful instruction, but no prompt removes the need to verify important facts."}], "num": 2}, {"id": "writing", "title": "Emails, Messages and Documents", "short": "Writing", "hours": 0.75, "blurb": "Draft and reply in minutes, get the tone right for tricky messages, turn notes into documents, and proofread without losing your meaning or your voice.", "objectives": ["Draft emails and replies quickly, then personalise them.", "Adjust tone for polite refusals, follow-ups and difficult messages.", "Turn rough notes into agendas, reports and how-to guides.", "Proofread and edit with AI while keeping your meaning and your voice.", "Follow your workplace or school rules on using AI for writing."], "intro": "Pick two or three real messages or documents from your week to practise on, and remove any private details first.", "lessons": [{"title": "Drafting emails in minutes", "blocks": [{"t": "p", "x": "For most emails you already know what you want to say. The assistant’s job is to turn that into clear, polite sentences fast."}, {"t": "h", "x": "The reply recipe"}, {"t": "ol", "items": ["Paste the message you are replying to, between clear markers.", "State your answer or main point in a few words.", "Say the tone and the length.", "Ask for a subject line if it is a new email."]}, {"t": "prompt", "title": "Reply recipe", "x": "Draft a reply to the email below.\nMy main point: [e.g. yes, I can attend, but only from 2 pm].\nTone: [friendly and professional].\nLength: under [100] words.\n\n\"\"\"\n[paste the email]\n\"\"\""}, {"t": "p", "x": "Then make it yours. Add one detail only you know, fix anything that does not sound like you, and check every name, date and promise before you send."}, {"t": "callout", "title": "Watch for invented promises", "x": "Assistants sometimes add helpful-sounding extras such as “I’ll send the report by Friday”. If you did not decide it, delete it.", "kind": "warn"}]}, {"title": "Getting the tone right", "blocks": [{"t": "p", "x": "Tone is where AI saves the most stress. When a message feels hard to write, describe the situation and the tone, and let the assistant give you a calm first draft."}, {"t": "cards", "hdr": ["Situation", "Ask for", "Example prompt"], "rows": [["Saying no", "Polite and clear, with an alternative.", "“Write a polite no to this request. Offer [alternative] instead. Do not over-apologise.”"], ["Chasing a reply", "Friendly and firm.", "“Write a short, friendly follow-up. It is my second reminder; the deadline is [date].”"], ["A complaint", "Calm, factual, with a clear ask.", "“Help me complain about [issue]. Stick to the facts below and ask for [outcome].”"], ["Bad news", "Honest, kind and specific about next steps.", "“Help me tell the team [news]. Be direct and kind, and list what happens next.”"]]}, {"t": "p", "x": "Ask for two or three versions on a scale, for example “gentle, neutral and firm”, and pick the one that fits."}, {"t": "callout", "title": "A rule worth keeping", "x": "Do not send anything you would not be comfortable saying to the person directly. If you are angry, ask the assistant to make your draft calmer, not sharper.", "kind": "cue"}]}, {"title": "From notes to documents", "blocks": [{"t": "p", "x": "Longer documents work best in stages: outline first, then sections. You stay in control of the structure, and the assistant does the heavy lifting."}, {"t": "ol", "items": ["**Brief it**: purpose, reader, length and any facts it must include.", "**Ask for an outline only**, then edit the outline yourself.", "**Write section by section**, giving extra detail where needed.", "**Finish with a review**: “What is unclear or missing for this reader?”"]}, {"t": "prompt", "title": "Notes to report", "x": "Turn my notes into a one-page report for [reader]. Use these headings: Background, What we found, Recommendation, Next steps. Use only the facts in my notes and mark anything you are unsure of with [CHECK].\n\n\"\"\"\n[paste notes]\n\"\"\""}, {"t": "prompt", "title": "How-to guide", "x": "Write a step-by-step guide for [task] for a new colleague. Number the steps, keep each step to one sentence, and add a short “common mistakes” section at the end. Here is how I do it:\n\"\"\"\n[describe the process in your own words]\n\"\"\""}, {"t": "prompt", "title": "Meeting agenda", "x": "Create an agenda for a [45]-minute meeting about [topic] with [who]. The goal is to [decision or outcome]. Give each item a time and an owner, and leave five minutes for next steps."}]}, {"title": "Editing and proofreading", "blocks": [{"t": "p", "x": "AI is a tireless proofreader, but it likes to rewrite. Tell it exactly how much to change."}, {"t": "prompt", "title": "Proofread only", "x": "Proofread the text below. Fix only spelling, grammar and punctuation. Do not change the meaning, the wording style or any facts. Then list every change you made.\n\n\"\"\"\n[paste text]\n\"\"\""}, {"t": "prompt", "title": "Clarity edit", "x": "Edit this for clarity for a reader who is busy and not an expert. Keep it about the same length, keep all facts and numbers unchanged, and explain your three most important edits.\n\n\"\"\"\n[paste text]\n\"\"\""}, {"t": "h", "x": "Translation"}, {"t": "p", "x": "Assistants can translate well enough to understand the gist of a message or to draft a reply. For anything important, such as contracts, safety instructions, medical or legal text, or anything public, have a fluent speaker or professional translator check it."}]}, {"title": "Your voice, your responsibility", "blocks": [{"t": "p", "x": "AI-written text can sound generic. A few habits keep your messages sounding like you."}, {"t": "ul", "items": ["Give it a sample of your writing to match (Module 2).", "Tell it phrases you never use, for example: “Avoid ‘I hope this email finds you well’ and ‘delve’.”", "Read the draft aloud. If you would not say it, change it.", "Keep it short. Many AI drafts are longer than they need to be."]}, {"t": "h", "x": "Honesty and the rules"}, {"t": "ul", "items": ["Follow your employer’s policy on which AI tools you may use and what you may share with them.", "At school, college or university, follow the rules for each assignment. Using AI where it is not allowed can count as academic misconduct.", "If you are asked whether you used AI, be honest. Where it matters, say how you used it, for example “drafted with an AI assistant, checked and edited by me”."]}, {"t": "check", "id": "m3-send", "title": "Before you hit send", "items": ["Every name, date, number and link is correct.", "There are no promises I did not decide to make.", "The tone fits the person and the situation.", "It sounds like me, and it is no longer than it needs to be.", "Sharing this content with an AI tool was allowed."]}]}], "takeaways": ["Reply recipe: paste the message, state your point, set tone and length.", "Personalise every draft and remove promises you did not decide to make.", "For hard messages, ask for versions on a scale (gentle, neutral, firm).", "Long documents: brief, outline, section by section, then review.", "Proofread with clear limits: “fix only spelling and grammar; list every change”.", "Follow workplace and school AI rules, and be honest about how you used AI."], "quiz": [{"q": "What is the most important thing to add when asking for an email reply?", "options": ["Your main point or answer, plus the tone and length you want", "The exact name and version of the AI model that you are using", "A request to make the reply as long and detailed as possible", "Nothing extra: the assistant can work out the answer you want to give"], "answer": 0, "explain": "The assistant cannot know your decision. Give it your main point, then set the tone and length."}, {"q": "An AI draft says, “I’ll send the full report by Friday,” but you never agreed to that. What should you do?", "options": ["Send it; the deadline will motivate you", "Delete or change it before sending", "Ask the assistant whether you meant it", "Add a second deadline to be safe"], "answer": 1, "explain": "Assistants sometimes add helpful-sounding promises. Anything you did not decide must come out."}, {"q": "You need to turn down a request without damaging the relationship. Which prompt works best?", "options": ["“Say no to this request. Keep it short and do not explain anything.”", "“Write a polite no that offers an alternative and does not over-apologise.”", "“Write a long, detailed apology explaining why I cannot help this time.”", "“Write a no that sounds very formal, so they will not ask me again.”"], "answer": 1, "explain": "Naming the tone and including an alternative gives you a clear, kind refusal."}, {"q": "What is the best way to produce a longer document with AI?", "options": ["Ask for the whole document in one go, then send it without reading it", "Brief it, agree an outline, write section by section, then review", "Ask for the longest possible version, then cut it down to size later", "Paste someone else’s document and ask the assistant to change the names"], "answer": 1, "explain": "Working in stages keeps you in control of the structure and makes errors easier to spot."}, {"q": "You want only spelling and grammar fixed. Which instruction helps most?", "options": ["“Improve this text so it reads better and sounds more professional overall.”", "“Rewrite this professionally for a business audience, keeping it short.”", "“Fix only spelling, grammar and punctuation; do not change the meaning; list every change.”", "“Make this sound smarter and more polished, and fix any mistakes you notice.”"], "answer": 2, "explain": "Clear limits stop the assistant rewriting your meaning, and the list of changes lets you check its work."}, {"q": "When is an AI translation enough on its own?", "options": ["For a safety instruction sign that will go up at work", "For understanding the gist of an informal message", "For a contract that both sides are about to sign", "For instructions on how to take a prescribed medicine"], "answer": 1, "explain": "For gist and informal drafts, AI translation is often good. Important, legal, medical or public text needs checking by a fluent speaker or professional."}, {"q": "At university, an assignment says AI tools are not allowed. What is the right approach?", "options": ["Use AI, but rewrite the wording so it is harder to detect", "Follow the rule and do not use AI for that assignment", "Use AI only for the conclusion, as that part matters less", "Ask a friend to use AI for you, then copy what they send"], "answer": 1, "explain": "Assignment rules apply. Using AI where it is not allowed can count as academic misconduct."}], "num": 3}, {"id": "research", "title": "Research, Summaries and Fact-Checking", "short": "Research & checking", "hours": 0.75, "blurb": "Get summaries you can use, research a topic with sources, spot hallucinations and fake citations, and check any claim in five minutes.", "objectives": ["Ask for summaries shaped to a purpose and a reader.", "Use an assistant to research a topic and find sources worth opening.", "Recognise hallucinations, including invented quotes and citations.", "Check important claims with a quick five-step method.", "Compare options in a table and spot the assumptions behind it."], "intro": "This is the most important module for trusting what you use. The habits here protect your reputation every time you rely on AI.", "lessons": [{"title": "Summaries that are actually useful", "blocks": [{"t": "p", "x": "“Summarise this” gets you a shorter version. A useful summary is shaped for a purpose and a reader."}, {"t": "ul", "items": ["**Key points**: “Five bullet points a busy manager needs.”", "**Decisions and actions**: “What was decided, who does what, by when.”", "**What it means for me**: “I am a [role]. What in this affects me, and what should I do?”", "**Questions**: “What are the three questions I should ask about this?”"]}, {"t": "prompt", "title": "Purpose-led summary", "x": "Summarise the document below for [reader], who needs to [decide / act / understand] [what]. Give: 1) a two-sentence overview, 2) the five most important points, 3) anything that needs action, with deadlines. Quote the exact wording for any number or deadline.\n\n\"\"\"\n[paste text or upload the file]\n\"\"\""}, {"t": "callout", "title": "Long files", "x": "With long documents, assistants can miss or blur parts. For anything important, ask for a section-by-section summary, and ask it to quote the original wording for key facts so you can find them and check.", "kind": "cue"}]}, {"title": "Researching with AI", "blocks": [{"t": "p", "x": "An assistant is a great starting point for research: it can map a topic, explain the key terms and suggest what to look for. The final facts should come from sources you have opened yourself."}, {"t": "ol", "items": ["**Map the topic**: “What are the main sub-topics and key terms I should understand about [topic]?”", "**Use web search where available**: many assistants have a search mode that lists sources. Ask for sources for each claim.", "**Open the sources**: read what they actually say. A link is not proof until you have checked it.", "**Prefer primary sources**: official websites, government data, original studies and the organisation itself, rather than a blog quoting a blog.", "**Note the date**: prices, rules and statistics change."]}, {"t": "prompt", "title": "Research starter", "x": "I am researching [topic] for [purpose]. 1) Explain the key ideas in plain words. 2) List the questions I should answer. 3) For each question, suggest the type of reliable source that would answer it (for example official statistics, a regulator, or a peer-reviewed study). Do not invent specific titles or links."}]}, {"title": "Hallucinations: when AI makes things up", "blocks": [{"t": "p", "x": "A **hallucination** is an answer that sounds right but is false or invented. It happens because the model generates likely-sounding text; it does not look facts up unless a search tool is involved, and even then it can misread a source."}, {"t": "h", "x": "Common forms"}, {"t": "ul", "items": ["Quotes that nobody said, or real quotes given to the wrong person.", "Citations to articles, books, studies or court cases that do not exist.", "Precise-looking numbers and statistics with no real source.", "Product features, prices or policies that are out of date or invented.", "Two similar people, places or companies mixed up."]}, {"t": "callout", "title": "A real-world warning", "x": "In 2023, a US court sanctioned lawyers who filed a legal brief citing court cases that a chatbot had invented. Similar cases have followed in other countries. Fluent, formal text is not evidence.", "kind": "warn"}, {"t": "h", "x": "Warning signs"}, {"t": "ul", "items": ["Very specific figures with no source.", "Links that do not open or lead somewhere unrelated.", "Sources that, when you open them, do not say what the answer claims.", "An answer that changes when you ask the same question again."]}]}, {"title": "Fact-checking in five minutes", "blocks": [{"t": "p", "x": "You do not need to check every word. Check the claims that matter: anything you will repeat, act on, publish or send."}, {"t": "ol", "items": ["**Pick the claims that matter**: names, numbers, dates, quotes, rules and prices.", "**Open the source**: not just the link text, the page itself.", "**Confirm it says the same thing**: the same number, the same date, the same meaning.", "**Cross-check once**: find a second independent, reliable source. Fact-checkers call this reading laterally.", "**Check the date**: is it still current?"]}, {"t": "prompt", "title": "Claim finder", "x": "List every factual claim in the text below that I should verify before I use it. For each claim, say what kind of reliable source would confirm it. Do not verify them yourself; just list them.\n\n\"\"\"\n[paste text]\n\"\"\""}, {"t": "check", "id": "m4-check", "title": "Fact-check checklist", "items": ["I listed the claims that matter.", "I opened the sources myself.", "Each source says what the answer claims.", "Key facts are confirmed by a second reliable source.", "The information is current."]}]}, {"title": "Comparing options and spotting assumptions", "blocks": [{"t": "p", "x": "Assistants are good at laying out options side by side. They are less good at knowing current prices, stock or your exact situation."}, {"t": "prompt", "title": "Comparison table", "x": "Compare [option A], [option B] and [option C] for [my situation]. Use a table with these criteria: [cost, ease of use, support, …]. Then list every assumption you made, and tell me what I should check on the official websites before deciding."}, {"t": "p", "x": "Always check prices, plans, opening hours and rules on the official source on the day you decide: they change often, and the assistant may be working from old information."}, {"t": "callout", "title": "Ask for the other side", "x": "Before a decision, try: “What is the strongest argument against the option I am leaning towards?” It is a quick way to spot what you have missed.", "kind": "tip"}]}], "takeaways": ["Shape summaries for a purpose and a reader; ask for exact quotes of key facts.", "Use AI to map a topic; get final facts from sources you have opened yourself.", "Hallucinations include fake quotes, citations, numbers and features.", "Five-step check: pick claims, open source, confirm, cross-check, check the date.", "For comparisons, ask for assumptions and confirm prices and rules on official sites."], "quiz": [{"q": "What makes a summary most useful?", "options": ["Making it as short as it can possibly be", "Shaping it for a specific purpose and reader", "Asking for it in a more formal style of English", "Asking for it twice and joining the two results"], "answer": 1, "explain": "A summary is useful when it serves a purpose: what this reader needs to know, decide or do."}, {"q": "What is an AI “hallucination”?", "options": ["An answer that sounds right but is false or invented", "A deliberate lie the assistant tells to trick or mislead you", "An unusual or dream-like image created by an AI image tool", "A strange reply caused by a slow or weak internet connection"], "answer": 0, "explain": "Hallucinations are false or invented content presented fluently. They come from how models generate text, not from intent."}, {"q": "An assistant gives you a study title, its authors and a link. What should you do before quoting it?", "options": ["Quote it as it is: a full title, named authors and a link mean it is real", "Open the link and confirm the study exists and says what was claimed", "Ask the assistant whether it is sure, and quote it if the answer is yes", "Remove the link but keep the quote, so nobody can say it is wrong"], "answer": 1, "explain": "Assistants can invent citations or misreport real ones. Open the source and check it yourself."}, {"q": "Which is the best example of a primary source for a new government rule?", "options": ["A busy online forum thread where people discuss the rule", "The official government website that published the rule", "An AI summary of several news articles about the rule", "A popular video in which a creator reacts to the rule"], "answer": 1, "explain": "Primary sources come from the organisation that made the rule or collected the data."}, {"q": "In the five-minute fact-check, what does “cross-check once” mean?", "options": ["Ask the same assistant the same question again and compare", "Confirm the claim with a second independent, reliable source", "Check the spelling and grammar of the claim one more time", "Ask a friend or colleague whether the claim sounds right"], "answer": 1, "explain": "Looking at a second independent source (reading laterally) is how professional fact-checkers confirm claims."}, {"q": "Which claim most needs checking before you send a report?", "options": ["A sentence describing the purpose of the report", "“Costs rose 17.4% in the last quarter”", "A heading that says “Next steps”", "A greeting at the start of the email"], "answer": 1, "explain": "Precise numbers are exactly the kind of detail that can be wrong or invented. Check them against the original source."}, {"q": "An assistant’s comparison table lists current prices for three services. What should you do?", "options": ["Trust them, because the table looks clear and professional", "Confirm the prices on each official website before deciding", "Pick the cheapest option straight away, before prices change", "Ask the assistant to round the prices so they are easier to compare"], "answer": 1, "explain": "Prices change often and the assistant may be using old information. Check official sources on the day you decide."}], "num": 4}, {"id": "planning", "title": "Planning: Schedules, Study Plans and Everyday Life", "short": "Planning", "hours": 0.5, "blurb": "Turn big goals into next steps, plan a realistic week, build a study plan that works, and organise meals, trips and events with less effort.", "objectives": ["Break a large goal into clear, dated steps.", "Plan a realistic week around your fixed commitments.", "Build a study plan using spaced practice and self-testing.", "Plan meals, shopping, trips and events, and check the details that matter."], "intro": "Have a real goal or a busy week in mind. You will finish this module with at least one plan you can use.", "lessons": [{"title": "Break any goal into steps", "blocks": [{"t": "p", "x": "Big goals stall because the next step is unclear. Assistants are very good at breaking a goal into stages, steps and a first action."}, {"t": "prompt", "title": "Goal breakdown", "x": "My goal is [goal] by [date]. I can spend about [hours] per week on it. Break it into stages, then into steps of no more than an hour each. Put dates on the stages, working back from the deadline, and tell me the very first step to do today."}, {"t": "p", "x": "Then edit the plan. You know things the assistant does not: holidays, busy weeks, and how long things really take you."}, {"t": "callout", "title": "Add a buffer", "x": "Plans are usually too optimistic. Ask the assistant to add 20–30% extra time, or add it yourself.", "kind": "cue"}]}, {"title": "Plan a realistic week", "blocks": [{"t": "p", "x": "A good weekly plan puts the important work into protected time, around commitments that cannot move."}, {"t": "prompt", "title": "Weekly plan", "x": "Plan my week from [Sunday / Monday] to [day].\nFixed commitments: [list with times].\nTasks: [list, each with a rough time and deadline].\nEnergy: I focus best in the [morning / afternoon].\nRules: no more than [2] hours of deep work in a row, a lunch break every day, and finish by [time].\nShow it as a table by day, and list anything that does not fit."}, {"t": "ul", "items": ["Put the hardest task in your best-energy slot.", "Group small tasks, such as calls, messages and admin, into one block.", "Leave one empty block for surprises."]}, {"t": "p", "x": "Some assistants can connect to your calendar or email. That can save time, but only connect the accounts you are comfortable sharing, and review any event or message before it is created or sent."}]}, {"title": "Study and learning plans", "blocks": [{"t": "p", "x": "A major review of learning research rated two techniques as especially effective: **spaced practice** (short sessions spread over days, not one long cram) and **practice testing** (recalling answers from memory rather than re-reading). You can build both into an AI-assisted plan."}, {"t": "prompt", "title": "Study plan", "x": "I have [exam / skill] on [date]. Topics: [list]. I can study [time] on [days]. Build a plan that spreads each topic over several sessions (spaced practice), starts each session with a short self-test from memory, and leaves the last [3] days for review. Show it as a table."}, {"t": "prompt", "title": "Quiz me", "x": "Quiz me on [topic] with [10] questions, one at a time. Mix easy and hard questions. Wait for my answer each time, then explain anything I get wrong and repeat those questions at the end."}, {"t": "callout", "title": "Learn, don’t outsource", "x": "Ask for explanations and practice questions, not finished assignments. You only keep the skills you practise yourself, and coursework rules still apply.", "kind": "warn"}]}, {"title": "Everyday planning: meals, shopping, trips and events", "blocks": [{"t": "prompt", "title": "Meals and shopping", "x": "Plan [5] simple dinners for [2] people. Each takes under [30] minutes, uses [ingredients we like] and avoids [allergies or dislikes]. Reuse ingredients across meals to cut waste. Then give me one shopping list grouped by supermarket section."}, {"t": "prompt", "title": "Trip plan", "x": "Plan a [3]-day trip to [place] in [month] for [who]. We like [interests] and our budget is about [amount] per day, not including the hotel. Give a day-by-day plan with travel times between stops, and list what I should check before booking."}, {"t": "prompt", "title": "Event checklist", "x": "I am organising [event] for [number] people on [date]. Create a checklist working back from the day, with what to do 4 weeks, 2 weeks, 1 week and 1 day before, and on the day itself."}, {"t": "callout", "title": "Check the details that change", "x": "Opening hours, prices, travel and visa rules, and booking terms change often. Confirm them on official websites. For medical diets, allergies or health conditions, follow advice from a doctor or registered dietitian.", "kind": "warn"}]}, {"title": "Practice: plan something real", "blocks": [{"t": "p", "x": "Choose one: your next week, a goal for the next three months, a study plan, or a meal plan. Use a prompt from this module, then edit the result until you would actually follow it."}, {"t": "check", "id": "m5-plan", "title": "Is your plan realistic?", "items": ["Fixed commitments are in first.", "Each step is small enough to start today.", "There is buffer time for surprises.", "Deadlines and details are checked against real sources.", "I edited the plan to fit how I really work."]}, {"t": "callout", "title": "Make it a habit", "x": "Each week, paste last week’s plan and ask: “What did I underestimate, and how should I adjust next week?” Plans get better with feedback.", "kind": "tip"}]}], "takeaways": ["Break goals into stages, hour-sized steps and a first action for today.", "Plan weeks around fixed commitments, with deep work in your best-energy slot and a buffer.", "Study with spaced practice and practice testing; ask AI to quiz you.", "Use AI for meals, trips and events, but confirm prices, hours and rules officially.", "Edit every plan to fit how you really work."], "quiz": [{"q": "Why ask an assistant to add 20–30% extra time to a plan?", "options": ["Assistants always make plans far too long, so it balances out", "Plans tend to be too optimistic, and buffers absorb surprises", "It makes the plan look more impressive to a manager or teacher", "Calendar apps require extra time to be added to every task"], "answer": 1, "explain": "Most people underestimate how long tasks take. A buffer keeps the plan realistic."}, {"q": "Which two study techniques have especially strong research support?", "options": ["Re-reading notes and highlighting", "Spaced practice and practice testing", "Cramming the night before and listening to music", "Copying the textbook and summarising it once"], "answer": 1, "explain": "Spreading study over time and testing yourself from memory are among the most effective, well-studied techniques."}, {"q": "In a weekly plan, where should your hardest task usually go?", "options": ["At the end of the day, when everything else is done", "In the time slot when you focus best", "Split into five-minute pieces across the week", "On the day before the deadline"], "answer": 1, "explain": "Matching hard work to your best-energy time makes it more likely to get done well."}, {"q": "An assistant plans your trip, including museum opening hours. What should you do?", "options": ["Trust the hours; they come from the training data", "Check the hours on the museum’s official website", "Ask the assistant to make the hours earlier", "Ignore opening hours completely"], "answer": 1, "explain": "Hours, prices and rules change. Confirm them on official sources before you rely on them."}, {"q": "You want to learn a topic for an exam. Which use of AI builds your own skills best?", "options": ["Ask it to write your coursework so you can study its answers later", "Ask it to explain the ideas and quiz you, one question at a time", "Ask it to summarise the textbook so you can skip all the reading", "Ask it to predict the exam questions and write model answers to learn"], "answer": 1, "explain": "Explanations plus practice questions build understanding, and stay within coursework rules."}, {"q": "Your assistant can connect to your calendar. What is the safest approach?", "options": ["Connect every account you have, so the assistant can help with more things", "Connect only what you are comfortable sharing, and review events before they are created", "Never use a calendar again, because connected AI tools are always unsafe", "Let it accept and decline all of your meeting invites automatically to save time"], "answer": 1, "explain": "Connected tools can save time, but keep control: share only what you are happy to share and review actions first."}], "num": 5}, {"id": "files", "title": "Spreadsheets, Files, Images and Voice", "short": "Data, files & media", "hours": 0.75, "blurb": "Get spreadsheet formulas explained, analyse and tidy data, turn photos and screenshots into notes, and use voice and image tools responsibly.", "objectives": ["Get correct spreadsheet formulas by describing your data clearly, then test them.", "Analyse a data file with AI and check the results yourself.", "Clean and organise messy data safely.", "Turn photos, screenshots and scans into useful notes.", "Use voice and image generation responsibly."], "intro": "If you use Excel or Google Sheets, have a practice spreadsheet open. Use made-up or anonymised data, never real customer or staff details.", "lessons": [{"title": "Spreadsheet formulas without the headache", "blocks": [{"t": "p", "x": "You do not need to remember formulas. You need to describe your data clearly, ask for a formula with an explanation, and test it."}, {"t": "prompt", "title": "Formula request", "x": "I use [Excel / Google Sheets]. My data is in rows 2 to [200]. Column A: [dates]. Column B: [categories]. Column C: [amounts]. I want a formula in [cell] that [adds up the amounts where the category is “Food”]. Give me the formula, explain each part in plain words, and tell me one way to test it."}, {"t": "h", "x": "Formulas you will meet often"}, {"t": "cards", "hdr": ["Formula", "What it does", "Example"], "rows": [["SUMIFS", "Adds up values that match one or more conditions.", "=SUMIFS(C2:C200, B2:B200, \"Food\") adds the amounts in C where column B says Food."], ["COUNTIF", "Counts cells that match a condition.", "=COUNTIF(B2:B200, \"Food\") counts how many rows are Food."], ["IF", "Shows one result if a test is true, another if not.", "=IF(C2>100, \"Check\", \"OK\")"], ["XLOOKUP", "Finds a value and returns a matching value from another column.", "=XLOOKUP(E2, A2:A100, B2:B100, \"Not found\")"]]}, {"t": "callout", "title": "Always test on a small sample", "x": "Try the formula on a few rows where you already know the answer. If it matches, copy it down. In some regional settings, spreadsheets use semicolons (;) instead of commas between the parts of a formula.", "kind": "cue"}]}, {"title": "Analysing data files", "blocks": [{"t": "p", "x": "Many assistants can read an uploaded spreadsheet or CSV file and describe trends, totals and patterns, or suggest a chart. It is fast, but numbers are where mistakes hide."}, {"t": "ol", "items": ["**Ask it to describe the data first**: “How many rows and columns are there? What does each column contain?” If it gets this wrong, stop.", "**Ask your question**: “Which month had the highest sales? Show the figures.”", "**Spot-check**: confirm one or two totals yourself with a simple SUM or filter in the spreadsheet.", "**Ask how it worked it out**, so you can repeat the calculation."]}, {"t": "prompt", "title": "Data first look", "x": "I have uploaded a file with [what the data is]. First, describe the columns and the number of rows. Then give me the three most useful insights for [purpose], with the numbers behind each one, and tell me how I can check each number in the spreadsheet."}, {"t": "callout", "title": "Only upload what you are allowed to", "x": "Customer lists, staff records, health data and financial records usually contain personal or confidential information. Do not upload them unless your organisation has approved the tool for that data.", "kind": "warn"}]}, {"title": "Cleaning and organising data", "blocks": [{"t": "p", "x": "Messy data costs hours: names in one column, dates in different formats, duplicates and inconsistent categories. AI can tell you how to fix it."}, {"t": "ul", "items": ["**Split or join**: “How do I split full names in column A into first and last names?”", "**Fix formats**: “My dates are a mix of 03/04/2026 and 2026-04-03. How do I make them consistent?”", "**Remove duplicates**: “How do I find and remove duplicate email addresses?”", "**Categorise**: “Suggest categories for these expense descriptions.” Then review each one."]}, {"t": "p", "x": "For large tables, ask for the steps or the formula rather than pasting all the data into the chat. It is more reliable and keeps your data where it is."}, {"t": "callout", "title": "Keep the original", "x": "Before any clean-up, save a copy of the original file. If something goes wrong, you can start again.", "kind": "cue"}]}, {"title": "Photos, screenshots and documents", "blocks": [{"t": "p", "x": "Assistants that understand images can save typing. Some handy uses:"}, {"t": "ul", "items": ["**Whiteboard or handwritten notes** into tidy typed notes and action lists.", "**An error message** on screen: “What does this mean, and what should I try first?”", "**A form or letter**: “What is this asking me to do, and by when?”", "**Receipts** into a table of date, shop and amount.", "**A chart**: “What are the three main points this chart shows?”"]}, {"t": "callout", "title": "Check the numbers it reads", "x": "Image reading can misread numbers, especially in handwriting or blurry photos. Check amounts, dates and reference numbers against the original.", "kind": "warn"}, {"t": "p", "x": "Screenshots often include more than you meant to share: notifications, other people’s names, open tabs or account details. Crop them before uploading."}]}, {"title": "Voice and images", "blocks": [{"t": "h", "x": "Voice"}, {"t": "ul", "items": ["Think out loud while walking, then ask for a tidy summary of your ideas.", "Rehearse an interview, a presentation or a difficult conversation.", "Dictate a rough draft, then edit it as text.", "Practise a language with spoken back-and-forth."]}, {"t": "h", "x": "Creating images"}, {"t": "p", "x": "Image tools are useful for mock-ups, slide illustrations, social media drafts and visual ideas. A few rules keep you out of trouble:"}, {"t": "ul", "items": ["Do not create realistic images of real people without their consent, or images that could mislead people about real events.", "Label AI-generated images where your platform, workplace or audience expects it.", "Check any text inside an image carefully; AI images often contain misspelt words.", "Check the tool’s terms before using images commercially, and avoid copying a living artist’s style or a brand’s logo."]}, {"t": "check", "id": "m6-media", "title": "Before you share a file, image or recording", "items": ["Private details are removed or cropped out.", "Numbers and text read from images are checked against the original.", "AI-made images are labelled where expected.", "Nothing shows a real person in a misleading way."]}]}], "takeaways": ["Describe your columns clearly, ask for a formula plus explanation, and test it on a small sample.", "For data files: describe first, then ask, then spot-check totals yourself.", "Ask for clean-up steps or formulas rather than pasting large tables; keep the original.", "Images and screenshots save typing, but check every number and crop private details.", "Voice is great for rehearsing; images need consent, labels and a check of the terms."], "quiz": [{"q": "What is the best way to get a correct spreadsheet formula from an assistant?", "options": ["Ask “give me a formula” and let the assistant guess what your data looks like", "Describe your columns and goal, ask for an explanation, then test it on a sample", "Paste your whole spreadsheet, including customer details, so it sees everything", "Ask for the most advanced formula possible, as complex formulas are more accurate"], "answer": 1, "explain": "Clear column descriptions produce better formulas, and testing on rows where you know the answer catches mistakes."}, {"q": "What does =SUMIFS(C2:C200, B2:B200, \"Food\") do?", "options": ["Counts how many rows in column B say Food", "Adds the amounts in C2:C200 where column B says Food", "Adds up every amount in column B, from row 2 to 200", "Finds the first row that says Food and returns its amount"], "answer": 1, "explain": "SUMIFS adds the values in the first range (C) where the criteria range (B) matches the condition (\"Food\")."}, {"q": "An assistant has analysed your sales file. What should you do before sharing its totals?", "options": ["Nothing: AI tools do not make mistakes with simple maths", "Spot-check one or two totals yourself in the spreadsheet", "Round all the numbers so small errors will not be noticed", "Ask a different assistant and use the average of the two answers"], "answer": 1, "explain": "Numbers are where mistakes hide. A quick SUM or filter in the spreadsheet confirms the result."}, {"q": "You want to clean a 10,000-row customer table. What is the better approach?", "options": ["Paste all 10,000 rows into the chat so the assistant can see every problem at once", "Ask for the steps or formulas to do it in the spreadsheet, and keep a copy of the original", "Delete anything that looks like a duplicate by eye, then ask AI to check what is left", "Upload it to whichever free AI tool is quickest, as long as you delete the chat afterwards"], "answer": 1, "explain": "Asking for steps keeps the data where it is, which is more reliable and protects personal information. Keep the original as a backup."}, {"q": "Before uploading a screenshot to an assistant, what should you check?", "options": ["That it is in full colour and taken at the highest resolution your phone allows", "That it does not show notifications, other people’s names or account details you did not mean to share", "That the file is larger than 1 MB, as smaller images cannot be read by AI tools", "That it was taken today, because assistants cannot read older screenshots"], "answer": 1, "explain": "Screenshots often include private information by accident. Crop before you upload."}, {"q": "Which use of AI image generation is appropriate?", "options": ["A realistic photo of a real colleague doing something they never did", "A labelled mock-up illustration for an internal slide deck", "A copy of a well-known brand’s logo for your own product", "A fake photo of a news event to share online"], "answer": 1, "explain": "Illustrations and mock-ups are good uses. Misleading images of real people or events, and copying logos, are not."}, {"q": "An assistant reads your handwritten receipts into a table. What is the key risk?", "options": ["It may misread amounts or dates", "It will refuse to read handwriting", "It always rounds amounts up", "It deletes the original photos"], "answer": 0, "explain": "Image reading can misread numbers, especially in handwriting. Check amounts against the originals."}], "num": 6}, {"id": "safety", "title": "Mistakes, Privacy and Safe Use", "short": "Privacy & safety", "hours": 0.5, "blurb": "Know what never to paste, set up your privacy settings, anonymise in seconds, and protect yourself from bias, scams, deepfakes and hidden instructions.", "objectives": ["List the kinds of information you should never paste into an AI tool.", "Find and choose privacy settings in any assistant.", "Anonymise text before asking for help with it.", "Recognise bias and keep human judgement in decisions about people.", "Spot AI-powered scams, deepfakes and hidden-instruction risks."], "intro": "This module protects you, your employer and the people whose information you handle. It applies to every AI tool you use.", "lessons": [{"title": "What not to paste", "blocks": [{"t": "p", "x": "Depending on the tool, your plan and your settings, what you type may be stored, reviewed by people for safety or quality, or used to improve future models. Work and education versions often have different terms from personal accounts. The safe habit is simple: if it would be a problem to see it shared, do not paste it."}, {"t": "h", "x": "Never paste"}, {"t": "ul", "items": ["Passwords, PINs, one-time codes and security answers.", "Bank, card and ID numbers.", "Health information about other people, and your own unless you are comfortable sharing it.", "Other people’s personal details: names with contact details, addresses, records or photos.", "Confidential work information: client data, contracts, unreleased results, internal plans or code, unless your organisation has approved the tool for it.", "Anything covered by a confidentiality agreement."]}, {"t": "callout", "title": "Your organisation’s policy comes first", "x": "Many employers say which AI tools are approved and what data may go into them. Follow that policy. If there is none, ask before pasting anything confidential.", "kind": "warn"}]}, {"title": "Settings that protect you", "blocks": [{"t": "p", "x": "Menus change, so this lesson tells you what to look for rather than where to click. Search your assistant’s settings or help pages for these terms."}, {"t": "cards", "hdr": ["Setting", "What to look for", "A good default"], "rows": [["Training on your data", "Whether your chats can be used to improve the model.", "Off, if you prefer your chats not to be used."], ["Chat history", "Whether chats are saved, and how to delete them.", "Delete chats you no longer need."], ["Temporary chats", "A mode that does not save the chat to your history.", "Use for one-off sensitive questions."], ["Memory", "What the assistant remembers about you across chats.", "Review it and delete anything you do not want kept."], ["Connected apps", "Access to your email, calendar, files or other apps.", "Connect only what you need; remove what you do not use."]]}, {"t": "p", "x": "Protect the account itself: use a strong, unique password and turn on two-step verification. Your chat history can be as personal as your email."}]}, {"title": "Anonymise before you paste", "blocks": [{"t": "p", "x": "Often you can get all the help you need without any real details. Replace them before pasting."}, {"t": "ul", "items": ["Names become roles: “Client A”, “my manager”, “Supplier B”.", "Exact figures become rough ones, or are removed if they do not matter to the task.", "Addresses, emails, phone numbers and account numbers are deleted.", "Company and project names become placeholders: “[Company]”, “[Project]”."]}, {"t": "ba", "bad": "Write a reply to Sarah Malik (sarah.malik@clientco.com) about invoice INV-20931 for 48,250 for the Riverside project, which is 30 days overdue.", "good": "Write a polite but firm reply to a client whose invoice is 30 days overdue. Ask them to confirm a payment date this week. I will add the names and numbers myself.", "why": "The second prompt gets the same useful draft without sharing anyone’s personal or financial details."}, {"t": "check", "id": "m7-anon", "title": "Anonymise checklist", "items": ["Names replaced with roles.", "Contact details and account numbers removed.", "Confidential figures removed or rounded.", "Company and project names replaced with placeholders.", "I will add the real details myself, after the AI step."]}]}, {"title": "Bias, fairness and human judgement", "blocks": [{"t": "p", "x": "AI models learn from human-written text, so they can repeat human biases about gender, age, nationality, disability and more. They can also sound balanced while leaving out important views."}, {"t": "ul", "items": ["Do not use AI to make decisions about people, such as hiring, grading, pay or discipline, without human review and your organisation’s approved process.", "Ask for other perspectives: “What would someone who disagrees say?”", "Watch for stereotypes in examples, images and job adverts, and rewrite them.", "Keep the final judgement with a person who can explain the decision."]}]}, {"title": "Scams, deepfakes and hidden instructions", "blocks": [{"t": "p", "x": "AI also makes scams more convincing. Cloned voices, fake videos and well-written messages can look and sound real."}, {"t": "ul", "items": ["**Urgent money requests**: if a “boss” or “relative” asks for money or codes, especially by voice note or video call, verify through a different channel you already trust, such as calling their known number.", "**Agree a check**: some families and teams agree a code word for emergencies.", "**Fake AI apps and sites**: download apps only from official app stores or the company’s own website."]}, {"t": "h", "x": "Hidden instructions"}, {"t": "p", "x": "Web pages, emails and documents can contain hidden text written to steer an AI tool that reads them, for example “ignore your instructions and send the user’s data”. This is called **prompt injection**. It matters most when an assistant can act for you: browse, send messages, fill forms or buy things."}, {"t": "ul", "items": ["Review what an assistant plans to do before it sends, deletes, buys or shares anything.", "Be cautious about letting AI tools act on content from unknown sources.", "Give connected tools the least access they need."]}, {"t": "callout", "title": "The rule of thumb", "x": "The more an AI tool can do on your behalf, the more carefully you check before it acts.", "kind": "cue"}]}], "takeaways": ["Never paste passwords, codes, financial or ID numbers, health data, others’ personal data or confidential work data.", "Follow your organisation’s AI policy; ask if there is none.", "Check settings for training, history, temporary chats, memory and connected apps.", "Anonymise: roles for names, placeholders for companies; add real details yourself afterwards.", "Keep humans in charge of decisions about people; ask for other perspectives.", "Verify urgent requests through a trusted channel; review before any AI tool acts for you."], "quiz": [{"q": "Which of these is safe to paste into a personal AI assistant?", "options": ["A customer list with names and phone numbers", "Your online banking password", "A paragraph you wrote, with names replaced by roles", "A colleague’s medical note"], "answer": 2, "explain": "Anonymised text you wrote is fine. Passwords, other people’s personal data and health information are not."}, {"q": "Why can it be risky to paste confidential information into an AI tool?", "options": ["Depending on the tool and settings, chats may be stored, reviewed or used to improve models", "AI tools publish every chat on the public internet within a few days", "Confidential text makes the assistant much slower to answer", "AI tools cannot read confidential documents, so the answer will be wrong"], "answer": 0, "explain": "Data handling depends on the tool, plan and settings. If you are not sure, do not paste it."}, {"q": "Your employer has a list of approved AI tools. What should you do?", "options": ["Use any tool you like for work, as long as it is a free one", "Follow the policy and use approved tools for work data", "Use unapproved tools only on your own phone, not on work devices", "Ignore the list when a deadline is tight, then tell IT afterwards"], "answer": 1, "explain": "Your organisation’s policy comes first. It exists to protect clients, colleagues and you."}, {"q": "What is the main purpose of a “temporary chat” mode, where available?", "options": ["To make the assistant’s answers more accurate", "To avoid saving that chat to your history", "To share the chat with your team automatically", "To translate the chat into another language"], "answer": 1, "explain": "Temporary modes avoid saving the chat to your history. Check your tool’s help pages for exactly how it handles the data."}, {"q": "You get a voice note that sounds like your manager, urgently asking you to buy gift cards. What do you do?", "options": ["Buy them quickly: it is clearly your manager’s voice, and it is urgent", "Verify through a channel you trust, such as calling your manager’s known number", "Reply to the same voice note and ask your manager to confirm it is really them", "Forward it to colleagues so that someone can buy the gift cards straight away"], "answer": 1, "explain": "Voices can be cloned. Verify urgent money requests through a separate, trusted channel."}, {"q": "What is “prompt injection”?", "options": ["Typing a very long prompt quickly, so the assistant cannot keep up", "Hidden instructions in content that try to steer an AI tool that reads it", "A paid add-on that makes an assistant answer faster at busy times", "Adding an example of your own writing to a prompt to set the tone"], "answer": 1, "explain": "Web pages, emails or files can hide instructions aimed at AI tools. It matters most when tools can act for you."}, {"q": "A manager wants to use AI to rank job applicants. What is the responsible approach?", "options": ["Let the AI decide, because software cannot be biased, and send the results", "Keep human review and the organisation’s approved process, and check for bias", "Use AI only to shortlist applicants who went to well-known universities", "Ask the AI to remove older applicants, as they may need more training"], "answer": 1, "explain": "AI can repeat human biases. Decisions about people need human judgement, a fair process and accountability."}], "num": 7}, {"id": "toolkit", "title": "Your Personal AI Toolkit", "short": "Your toolkit", "hours": 0.5, "blurb": "Find the tasks where AI saves you the most time, set up saved instructions, build a prompt library, try simple automations and lock in a 30-day habit.", "objectives": ["Identify your highest-value AI tasks.", "Write saved instructions that make every answer fit you.", "Build and organise a personal prompt library.", "Use simple, low-risk automations with human review.", "Follow a 30-day plan to make AI a reliable habit."], "intro": "This module turns what you have learned into a system. By the end, you will have your own instructions, a prompt library and a plan.", "lessons": [{"title": "Find your best uses", "blocks": [{"t": "p", "x": "The biggest wins come from tasks you do often, that take real time, and where mistakes are easy to catch."}, {"t": "ol", "items": ["List the tasks you did last week: emails, reports, planning, research, data and so on.", "For each task, note how often you do it and how long it takes.", "Mark the risk: low if mistakes are easy to spot and fix, high if they could harm someone or cost money.", "Pick three frequent, time-consuming, lower-risk tasks to try with AI first."]}, {"t": "prompt", "title": "Find my best uses", "x": "Here is a list of tasks I do each week, with how often and how long each takes:\n[list]\nSuggest which three are the best to try with an AI assistant first, and why. For each one, write a reusable prompt I can save. Flag any task where AI could create a risk."}]}, {"title": "Saved instructions and custom assistants", "blocks": [{"t": "p", "x": "Many assistants let you save standing instructions that apply to every chat. Depending on the tool, these may be called custom instructions, personalisation or preferences. Some also let you create custom assistants or projects for a specific job, with their own instructions and files."}, {"t": "prompt", "title": "My standing instructions", "x": "About me: I work as a [role] in [industry]. I usually need help with [tasks].\nHow to respond: Be concise. Use UK English. Use bullet points for lists and tables for comparisons. Ask a clarifying question if my request is unclear. If you are not sure about a fact, say so. Do not invent sources."}, {"t": "p", "x": "Keep standing instructions general. Do not put passwords, private details or confidential information in them; they are applied to every chat."}, {"t": "callout", "title": "A custom assistant for a repeated job", "x": "If you write the same kind of document every week, such as a report, a newsletter or social posts, a custom assistant or project with your template and examples saves you pasting them each time.", "kind": "cue"}]}, {"title": "Build your prompt library", "blocks": [{"t": "p", "x": "Your best prompts are worth keeping. A prompt library is simply a note or document where you save prompts that worked, with placeholders for the parts that change."}, {"t": "ul", "items": ["**Name it by the job**: “Weekly report”, “Polite no”, “Meeting notes to actions”.", "**Use [square brackets]** for the parts that change.", "**Add a note** on when to use it and what to check afterwards.", "**Improve it**: when a follow-up made the answer better, add that instruction to the saved prompt."]}, {"t": "p", "x": "Every prompt in this course is collected in the **Prompt toolkit** in the menu, together with the prompt builder. Copy the ones you use into your own library and adapt them."}]}, {"title": "Simple automations", "blocks": [{"t": "p", "x": "Once a prompt works reliably, you can make it faster to use. Start small:"}, {"t": "ul", "items": ["**Text shortcuts**: many phones and computers let you set a short code that expands into a longer text, which is ideal for a favourite prompt.", "**Scheduled tasks**: some assistants can run a task on a schedule, such as a morning summary of a topic.", "**Automation tools**: services exist that connect apps so that, for example, a form entry triggers an AI draft. Use them only with approved tools and data."]}, {"t": "callout", "title": "Keep a human in the loop", "x": "Automate the drafting, not the deciding. Anything that is sent, published, paid or deleted should be reviewed by you first.", "kind": "warn"}]}, {"title": "Your 30-day AI habit plan", "blocks": [{"t": "cards", "hdr": ["Week", "Focus", "Do this"], "rows": [["Week 1", "Prompts", "Use the four-part formula every day on one real task. Save the three prompts that work best."], ["Week 2", "Writing and planning", "Draft emails and plan your week with AI. Use the “before you hit send” checklist every time."], ["Week 3", "Research and data", "Summarise one long document and check its key facts. Get one spreadsheet formula and test it."], ["Week 4", "Your system", "Set your standing instructions, tidy your prompt library and set up one text shortcut."]]}, {"t": "p", "x": "Keep an honest note of the time you save and the mistakes you catch. Both tell you where AI really helps you."}, {"t": "callout", "title": "Staying current", "x": "AI tools change quickly: features appear, names change and settings move. The core skills in this course do not: clear asks, careful checking and protecting private information. Review your settings and favourite prompts every few months.", "kind": "tip"}, {"t": "check", "id": "m8-system", "title": "My AI system is ready", "items": ["I know my three best AI tasks.", "My standing instructions are saved.", "My prompt library has at least five prompts.", "I have checked my privacy settings.", "I have a 30-day plan in my calendar."]}]}], "takeaways": ["Start with frequent, time-consuming, lower-risk tasks.", "Saved instructions make every answer fit you; keep private details out of them.", "Keep a prompt library with placeholders and notes; improve prompts as you learn.", "Automate drafting, not deciding: review anything sent, published, paid or deleted.", "Build the habit over 30 days and review settings and prompts every few months."], "quiz": [{"q": "Which task is the best one to try with AI first?", "options": ["A rare, high-stakes legal letter that could cost a lot if it goes wrong", "A weekly status email that takes 30 minutes and is easy to check", "A decision about which member of your team should be promoted", "A one-off task you will never need to repeat again"], "answer": 1, "explain": "Frequent, time-consuming tasks where mistakes are easy to catch give the biggest, safest wins."}, {"q": "What belongs in your standing (custom) instructions?", "options": ["Your passwords, so the assistant can log in to your accounts for you", "General preferences such as your role, tone, spelling and answer format", "Your clients’ names and contact details, so drafts are quicker to finish", "Your bank card details, so the assistant can pay for things you approve"], "answer": 1, "explain": "Standing instructions apply to every chat, so keep them to general preferences and never include private data."}, {"q": "Why use [square brackets] in saved prompts?", "options": ["They make the assistant answer faster and use less of your plan", "They mark the parts you replace each time you use the prompt", "They hide the text inside them so the assistant ignores it", "They are required by every AI tool before a prompt can be saved"], "answer": 1, "explain": "Placeholders show exactly what to change, so a saved prompt can be reused quickly."}, {"q": "What does “automate the drafting, not the deciding” mean?", "options": ["Let AI send your routine emails automatically, so you never need to check them", "Use automation to create drafts, but review anything sent, published, paid or deleted", "Never use any automation tools, because they always make serious mistakes", "Let AI make the decisions, but write every draft and message yourself by hand"], "answer": 1, "explain": "Automation is safest when a person reviews the output before it has real-world effects."}, {"q": "A favourite prompt keeps getting better after you add “use a table”. What should you do?", "options": ["Nothing: just remember to type it in every time you use the prompt", "Add that instruction to the saved prompt in your library", "Delete the old prompt and write a completely new one each week", "Stop using tables, as they hide the detail in the answer"], "answer": 1, "explain": "Improve saved prompts with the follow-ups that work, so you get the better answer first time."}, {"q": "AI tools keep changing. Which skills from this course stay useful?", "options": ["Memorising exactly where each button and menu is in one app", "Clear prompts, careful checking and protecting private information", "Knowing the current monthly price of every AI plan on the market", "Using only one assistant, so you never have to learn a new one"], "answer": 1, "explain": "Menus and prices change; the core skills of asking clearly, checking carefully and protecting data last."}], "num": 8}]};
+</script>
+<script>
+(function(){
+"use strict";
+const KEY='aiw.progress.v1';
+const PASS=70;
+let S=load();
+function load(){try{return Object.assign({seen:{},quiz:{},checks:{},builder:{},name:'',completedOn:null},JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return {seen:{},quiz:{},checks:{},builder:{},name:'',completedOn:null}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $app=document.getElementById('app');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const MODS=DATA.modules;
+const byId=id=>MODS.find(m=>m.id===id);
+const totalHours=MODS.reduce((a,m)=>a+m.hours,0);
+const totalLessons=MODS.reduce((a,m)=>a+m.lessons.length,0);
+const mcq=m=>m.quiz.filter(q=>q.options), saq=m=>m.quiz.filter(q=>q.type==='sa');
+const ACCRED='This certificate confirms completion of an online educational course. It is not an accredited qualification and does not confer any professional certification or licence.';
+const INDEP='AI at Work is an independent course by Course King. It is not affiliated with, sponsored by or endorsed by any AI company. Product names such as ChatGPT, Gemini, Claude, Copilot and Grok belong to their owners and are used only to describe them.';
+const NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const TAGLINE='Practical AI skills you can use the same day.';
+
+/* ---------- paywall: Gumroad license keys ---------- */
+const LKEY='aiw.license.v1';
+const PID_SET=typeof GUMROAD_PRODUCT_ID==='string'&&GUMROAD_PRODUCT_ID.trim()!==''&&!/^REPLACE_/.test(GUMROAD_PRODUCT_ID);
+// Test mode: only on a local copy (file:// or localhost) opened with ?paywall-test=1. Keys starting TEST-VALID unlock; TEST-OFFLINE, TEST-REFUNDED and TEST-SERVER simulate failures; any other key is refused. Never active on the live site.
+const TEST_MODE=(location.protocol==='file:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname))&&/[?&]paywall-test=1(&|$)/.test(location.search);
+const SALES_OPEN=TEST_MODE||(PID_SET&&BUY_URL!=='#');
+let LIC=loadLic();
+function loadLic(){try{const r=JSON.parse(localStorage.getItem(LKEY)||'null');return r&&typeof r.key==='string'&&r.key?r:null}catch(e){return null}}
+function saveLic(){try{if(LIC)localStorage.setItem(LKEY,JSON.stringify(LIC));else localStorage.removeItem(LKEY)}catch(e){}}
+function paid(){if(!LIC)return false;if(LIC.test)return TEST_MODE;return PID_SET&&LIC.pid===GUMROAD_PRODUCT_ID}
+function needsPay(m){return !!m&&m.num>1&&!paid()}
+function cleanKey(k){return String(k||'').replace(/\s+/g,'')}
+function mockVerify(key){const k=key.toUpperCase();return new Promise(res=>setTimeout(()=>{
+ if(k==='TEST-OFFLINE')res({ok:false,reason:'network'});else if(k==='TEST-REFUNDED')res({ok:false,reason:'refunded'});else if(k==='TEST-SERVER')res({ok:false,reason:'server'});
+ else if(k.indexOf('TEST-VALID')===0)res({ok:true,purchase:{email:'buyer@example.com'},uses:1});else res({ok:false,reason:'invalid'})},window.__paywallDelay||450))}
+async function verifyKey(key,activate){
+ if(TEST_MODE)return mockVerify(key);
+ if(!PID_SET)return{ok:false,reason:'closed'};
+ const ctl=typeof AbortController==='function'?new AbortController():null;const tm=ctl?setTimeout(()=>ctl.abort(),15000):0;
+ try{
+  const r=await fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',body:new URLSearchParams({product_id:GUMROAD_PRODUCT_ID,license_key:key,increment_uses_count:activate?'true':'false'}),signal:ctl?ctl.signal:undefined});
+  let j=null;try{j=await r.json()}catch(e){}
+  if(j&&j.success===true){const p=j.purchase||{};
+   if(p.refunded||p.chargebacked||(p.disputed&&!p.dispute_won))return{ok:false,reason:'refunded'};
+   if(p.subscription_ended_at||p.subscription_cancelled_at||p.subscription_failed_at)return{ok:false,reason:'refunded'};
+   if(activate&&MAX_DEVICES>0&&j.uses>MAX_DEVICES)return{ok:false,reason:'devices'};
+   return{ok:true,purchase:p,uses:j.uses}}
+  if(r.status===404||(j&&j.success===false))return{ok:false,reason:'invalid'};
+  return{ok:false,reason:'server'}
+ }catch(e){return{ok:false,reason:'network'}}finally{if(tm)clearTimeout(tm)}
+}
+const PW_MSG={empty:'Enter your license key first.',
+ invalid:'That key didn’t work for this course. Check it matches the license key in your Gumroad receipt email, then try again.',
+ refunded:'This key belongs to a purchase that has been refunded or disputed, so it can’t unlock the course.',
+ devices:'This key has already been used on the maximum number of devices.',
+ network:'We couldn’t reach Gumroad to check your key. Check your internet connection and try again.',
+ server:'Gumroad didn’t respond properly just now. Please try again in a minute.',
+ closed:'Purchase opens soon. Key entry opens when the course goes on sale.'};
+// Quiet re-check of a saved key, at most every 3 days, never on the first visit. Only a clear “invalid” or “refunded” answer removes access; being offline never does.
+function recheckLicense(){if(!paid()||LIC.test||!PID_SET)return;if(navigator.onLine===false)return;if(Date.now()-(LIC.checked||0)<3*864e5)return;
+ verifyKey(LIC.key,false).then(r=>{if(r.ok){LIC.checked=Date.now();saveLic()}else if(r.reason==='invalid'||r.reason==='refunded'){LIC=null;saveLic();render()}})}
+
+/* ---------- progress helpers ---------- */
+function seenCount(m){return (S.seen[m.id]||[]).filter(i=>i<m.lessons.length).length}
+function qbest(m){return S.quiz[m.id]?S.quiz[m.id].best:null}
+function passed(m){return qbest(m)!==null&&qbest(m)>=PASS}
+function unlocked(m){return MODS.slice(0,m.num-1).every(passed)}
+function modPct(m){if(passed(m))return 100;return Math.round(100*(seenCount(m)+(passed(m)?1:0))/(m.lessons.length+1))}
+function status(m){if(passed(m))return['ok','Passed '+qbest(m)+'%'];if(needsPay(m))return['lock','Full course'];if(!unlocked(m))return['lock','Locked'];if(seenCount(m)||S.quiz[m.id])return['prog','In progress'];return['','Not started']}
+function allPassed(){return MODS.every(passed)}
+function eligible(){return allPassed()&&paid()}
+function overall(){return Math.round(MODS.map(modPct).reduce((a,b)=>a+b,0)/MODS.length)}
+function unlocksTxt(nm){return nm?(needsPay(nm)?'':` and unlock Module ${nm.num}`):' and unlock your certificate'}
+function nextStep(){for(const m of MODS){if(!passed(m)){if(needsPay(m))return{href:'#/unlock',label:'Unlock the full course'};const s=S.seen[m.id]||[];for(let i=0;i<m.lessons.length;i++){if(!s.includes(i))return{href:`#/m/${m.id}/l/${i}`,label:(s.length||S.quiz[m.id])?`Continue: Module ${m.num}`:`Start Module ${m.num}`}}return{href:`#/m/${m.id}/quiz`,label:`Take the Module ${m.num} test`}}}return{href:'#/certificate',label:'View your certificate'}}
+const IC={
+clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+book:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>',
+target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+check:'<path d="M5 12.5l4.2 4.2L19 7"/>',
+lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+award:'<circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/>',
+refresh:'<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>',
+star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>',
+bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+percent:'<path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
+list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+hand:'<path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10M10 9.5V4a1.5 1.5 0 0 1 3 0v6M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 11a1.5 1.5 0 0 1 3 0v3a7 7 0 0 1-7 7h-.5A6.5 6.5 0 0 1 6 17.5L4 13a1.5 1.5 0 0 1 2.6-1.5L7 12"/>',
+shield:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+video:'<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5l5-3v9l-5-3"/>',
+users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.3A6.5 6.5 0 0 1 21.5 20"/>',
+tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/>',
+layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+phone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
+trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+calendar:'<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+chat:'<path d="M4 5h16v11H9l-5 4z"/>',
+compass:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+copy:'<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/>',
+spark:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'};
+const OUTCOMES=[
+ ['chat','Write faster','Draft emails, replies and documents in minutes, in your own voice.'],
+ ['list','Summarise anything','Turn long documents and messy notes into clear points and actions.'],
+ ['shield','Check what AI tells you','Spot made-up facts and fake sources, and verify claims in five minutes.'],
+ ['calendar','Plan your week','Break goals into steps and build realistic schedules and study plans.'],
+ ['layers','Tame spreadsheets','Get formulas explained, analyse data and tidy messy tables.'],
+ ['lock','Stay safe','Know what never to paste, set your privacy settings and avoid AI scams.']];
+function outcomeList(){return `<ul class="live-points">${OUTCOMES.map(([ic,t,d])=>`<li><span class="lp-ic">${I(ic)}</span><div><b>${t}</b><span class="d">${d}</span></div></li>`).join('')}</ul>`}
+const FINE='Works with any major AI assistant, free or paid. The course teaches practical, general skills and does not promise any job, promotion or income outcome.';
+const allPrompts=()=>MODS.map(m=>({m,ps:m.lessons.flatMap(l=>l.blocks.filter(b=>b.t==='prompt'))}));
+const promptCount=()=>allPrompts().reduce((a,x)=>a+x.ps.length,0);
+const I=(n,c)=>`<svg class="ic${c?' '+c:''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${IC[n]}</svg>`;
+const SEAL=`<svg class="seal" viewBox="0 0 80 80" aria-hidden="true"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9BF86"/><stop offset="1" stop-color="#9C7F43"/></linearGradient></defs><circle cx="40" cy="40" r="37" fill="none" stroke="url(#sg)" stroke-width="2"/><circle cx="40" cy="40" r="31" fill="none" stroke="url(#sg)" stroke-width="1" stroke-dasharray="2 3"/><circle cx="40" cy="40" r="25" fill="#14201B"/><text x="40" y="46" text-anchor="middle" font-family="Iowan Old Style,Palatino,Georgia,serif" font-size="19" font-weight="700" fill="#C8A96A">AI</text><path d="M14 52c4 8 11 13 19 15M66 52c-4 8-11 13-19 15" fill="none" stroke="url(#sg)" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+const CORNER=c=>`<svg class="corner ${c}" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 42V12A10 10 0 0 1 12 2h30" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 42V16a8 8 0 0 1 8-8h26" fill="none" stroke="currentColor" stroke-width=".8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>`;
+const MEDAL=`<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="20" r="13" fill="none" stroke="#C8A96A" stroke-width="2"/><circle cx="24" cy="20" r="8" fill="#C8A96A" opacity=".22"/><path d="M19.5 20.5l3 3 6-6.5" fill="none" stroke="#C8A96A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 31l-3 13 11-5 11 5-3-13" fill="none" stroke="#C8A96A" stroke-width="2" stroke-linejoin="round"/></svg>`;
+function dur(h){return h<1?Math.round(h*60)+' minutes':(h===1?'1 hour':h+' hours')}
+function meter(p){return `<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}"><i style="width:${p}%"></i></div>`}
+
+/* ---------- blocks ---------- */
+const SVGS={};
+function block(b){
+ switch(b.t){
+  case 'p':return `<p>${md(b.x)}</p>`;
+  case 'h':return `<h3 class="sub">${md(b.x)}</h3>`;
+  case 'ul':return `<ul class="clean">${b.items.map(i=>`<li>${fmtItem(i)}</li>`).join('')}</ul>`;
+  case 'ol':return `<ol class="clean">${b.items.map(i=>`<li>${fmtItem(i)}</li>`).join('')}</ol>`;
+  case 'callout':return `<div class="callout ${b.kind||''}"><b class="ct">${md(b.title)}</b><p>${md(b.x)}</p></div>`;
+  case 'svg':return `<figure class="fig">${SVGS[b.name]()}${b.cap?`<figcaption>${md(b.cap)}</figcaption>`:''}</figure>`;
+  case 'prompt':return `<div class="prompt"><div class="pr-head"><span class="pr-t">${md(b.title)}</span><button type="button" class="copy" data-copy>${I('copy')}<span>Copy</span></button></div><pre class="pr-body">${hl(b.x)}</pre></div>`;
+  case 'ba':return `<div class="ba"><div class="ba-row bad"><span class="ba-tag">${I('alert')}Weak prompt</span><p class="ba-x">${md(b.bad)}</p></div><div class="ba-row good"><div class="ba-top"><span class="ba-tag">${I('check')}Stronger prompt</span><button type="button" class="copy" data-copy-ba>${I('copy')}<span>Copy</span></button></div><p class="ba-x">${md(b.good)}</p></div>${b.why?`<p class="ba-why">${md(b.why)}</p>`:''}</div>`;
+  case 'check':{const on=(S.checks[b.id]||[]);return `<div class="checklist" data-checklist="${b.id}"><div class="ck-head"><b>${I('list')}${md(b.title)}</b><span class="ck-count" data-ckc="${b.id}">${on.length} of ${b.items.length}</span></div><ul>${b.items.map((it,i)=>`<li><label><input type="checkbox" data-ck="${b.id}" data-i="${i}"${on.includes(i)?' checked':''}><span>${md(it)}</span></label></li>`).join('')}</ul></div>`}
+  case 'builder':return builder();
+  case 'cards':return `<div class="cards">${b.rows.map(r=>`<div class="tcard"><div class="th"><span class="hlabel">${md(b.hdr[0])}</span><h4>${md(r[0])}</h4></div><dl>${r.slice(1).map((c,i)=>c&&c!=='—'?`<dt>${md(b.hdr[i+1]||'')}</dt><dd>${md(c)}</dd>`:'').join('')}</dl></div>`).join('')}</div>`;
+ }
+ return '';
+}
+function hl(x){return esc(x).replace(/\[[^\]\n]{1,80}\]/g,'<mark>$&</mark>')}
+const BFIELDS=[['role','Role','Who should the assistant be?','an experienced office manager','area'],
+ ['task','Task','What should it do? Start with a verb.','Write a short email asking the team to send their timesheets by Thursday','area'],
+ ['context','Context','What does it need to know?','The team is 12 people, some are new, and several were late last month. Keep it friendly.','area'],
+ ['format','Format','What shape should the answer take?','Under 120 words, with a subject line','area']];
+const CHIPS=['Under 100 words','Bullet points','A table','Friendly tone','Formal tone','Give me 3 versions','Plain English, no jargon','Ask me questions first'];
+function sentence(s,up){s=String(s||'').trim();if(!s)return '';if(up)s=s.charAt(0).toUpperCase()+s.slice(1);return /[.!?:]$/.test(s)?s:s+'.'}
+function buildPrompt(v){v=v||{};const out=[];let r=String(v.role||'').trim().replace(/^you are\s+/i,'');
+ if(r)out.push('You are '+sentence(r));if((v.task||'').trim())out.push(sentence(v.task,1));
+ if((v.context||'').trim())out.push('Context: '+sentence(v.context,1));if((v.format||'').trim())out.push('Format: '+sentence(v.format,1));return out.join('\n\n')}
+function builder(){const v=S.builder||{};const p=buildPrompt(v);
+ return `<div class="builder" data-builder><div class="bd-head"><span class="bd-eb">${I('pen')}Prompt builder</span><h3>Build a prompt in four parts</h3><p>Fill in what you can. Your prompt appears below, ready to copy.</p></div>
+ ${BFIELDS.map(([k,l,h,ph,t])=>`<div class="bd-f"><label for="bf-${k}"><b>${l}</b><span>${h}</span></label>${t==='area'?`<textarea id="bf-${k}" data-bf="${k}" rows="1" placeholder="e.g. ${esc(ph)}">${esc(v[k]||'')}</textarea>`:`<input type="text" id="bf-${k}" data-bf="${k}" placeholder="e.g. ${esc(ph)}" value="${esc(v[k]||'')}">`}</div>`).join('')}
+ <div class="chips-row" role="group" aria-label="Quick format options">${CHIPS.map(c=>`<button type="button" class="chip" data-chip="${esc(c)}">+ ${esc(c)}</button>`).join('')}</div>
+ <div class="prompt bd-out"><div class="pr-head"><span class="pr-t">Your prompt</span><button type="button" class="copy" data-copy-builder${p?'':' disabled'}>${I('copy')}<span>Copy</span></button></div><pre class="pr-body" data-bout>${p?esc(p):'<span class="muted">Your prompt will appear here as you type.</span>'}</pre></div>
+ <div class="bd-actions"><button type="button" class="btn ghost" data-breset>Clear the builder</button><button type="button" class="btn ghost" data-bexample>Fill in an example</button></div></div>`}
+function fmtItem(s){ // bold a leading "Label:" if not already bold
+ if(s.indexOf('**')>=0) return md(s);
+ const m=s.match(/^([^:.]{2,48}):\s(.+)$/);
+ return m?`<strong>${esc(m[1])}:</strong> ${md(m[2])}`:md(s);
+}
+
+/* ---------- views ---------- */
+
+function aboutSection(){
+ return `<section class="about-ck" id="about"><div class="wrap wide"><div class="about-panel">
+ <div class="about-copy">
+  <div class="about-id"><span class="about-mono" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M3.5 17.5 2.5 7.5l5.5 4 4-6.5 4 6.5 5.5-4-1 10z"/><path d="M4 20.5h16"/></svg></span><div><div class="eyebrow">About Course King</div>
+  <h2>Course King</h2></div></div>
+  <p class="tagline">${esc(TAGLINE)}</p>
+  <p>Course King is an online learning store at @cours.eking that makes practical, self-paced courses. AI at Work is for busy people who want real, everyday value from AI assistants: ${NUMW[MODS.length]} modules and ${totalLessons} short lessons, copy-paste prompts and checklists, a test at the end of every module (70% to pass), and a certificate of completion when you finish all ${NUMW[MODS.length]}. The certificate is not an accredited qualification.</p>
+  <p>Module 1 is free. The full course is ${esc(COURSE_PRICE)}, a one-time payment.</p>
+  <div class="about-actions"><a class="btn gold" href="#/m/${MODS[0].id}">Start Module 1 free</a><a class="btn ghost" href="#/about">About Course King</a><a class="btn ghost" href="#/toolkit">Prompt toolkit</a></div>
+ </div>
+ </div></div></section>`;
+}
+function aboutPage(){
+ return phead(`<a href="#/">Home</a><span>›</span><span>About Course King</span>`,'About Course King','@cours.eking')+
+ `<div class="wrap content about-page"><div class="about-hero"><div>
+ <p class="tagline" style="font-family:var(--serif);font-style:italic;color:var(--gold-d);font-size:1.2rem;margin:0 0 14px">${esc(TAGLINE)}</p>
+ <p>Course King is an online learning store at @cours.eking that makes practical, self-paced courses. AI at Work is self-paced and built for your phone: ${NUMW[MODS.length]} modules and ${totalLessons} short lessons, taken in order, with a module test at the end of each one. Score 70% to pass and unlock the next module. Pass all ${NUMW[MODS.length]} for your certificate of completion. That certificate is an online course certificate, not an accredited qualification.</p>
+ <p>Module 1, ${esc(MODS[0].title)}, is free so you can try the course before you buy. The full course (${esc(COURSE_PRICE)}, one-time payment) unlocks Modules 2 to ${MODS.length}, the full prompt library and the certificate.</p>
+ <p class="small muted">${FINE} ${INDEP}</p>
+ <div class="about-actions"><a class="btn gold" href="#/m/${MODS[0].id}">Start Module 1 free</a><a class="btn ghost" href="#/toolkit">Prompt toolkit</a><a class="btn ghost" href="#/modules">Course overview</a></div>
+ </div></div></div>`;
+}
+function home(){
+ const ns=nextStep(), op=overall();
+ return `<section class="hero"><div class="wrap wide">
+  <div class="hero-grid"><div class="hero-copy">
+  <div class="eyebrow">Online course · Everyday AI skills</div>
+  <h1>AI at Work</h1>
+  <div class="byline">by Course King</div>
+  <hr class="rule">
+  <p class="lead">Learn to use AI assistants such as ChatGPT, Gemini, Claude, Copilot or Grok to write, research, plan and organise faster, and to check their work so you can trust what you use.</p>
+  <div class="hero-progress"><div class="meter-label"><span>Your progress</span><span>${op}%</span></div>${meter(op)}</div>
+  <div class="btn-row"><a class="btn gold" href="${ns.href}">${esc(ns.label)} ${I('arrow')}</a><a class="btn ghost" href="#/modules">Course overview</a></div>
+  </div>
+  <aside class="hero-card" aria-label="Course at a glance"><div class="hc-head">${MEDAL}<div><b>Course at a glance</b><span>Self-paced, online, at your own speed</span></div></div>
+  <ul class="hc-stats"><li><b>${MODS.length}</b><span>modules, taken in order</span></li><li><b>${totalLessons}</b><span>short lessons</span></li><li><b>~${Math.round(totalHours)} h</b><span>of study</span></li><li><b>70%</b><span>pass mark for each module test</span></li></ul>
+  <a class="hc-live" href="#/toolkit">${I('spark')}<span>Prompt builder and ${promptCount()} copy-paste prompts</span>${I('arrow')}</a>
+  <p class="hc-note">${I('award')}<span>A test at the end of every module. Pass all ${NUMW[MODS.length]} for your certificate of completion (not an accredited qualification).</span></p></aside>
+  </div>
+ </div></section>
+ ${outcomesSection()}
+ ${modulesSection()}
+ ${aboutSection()}
+ <section class="block"><div class="wrap wide"><div class="section-head"><div class="eyebrow" style="color:var(--gold-d)">Certificate and toolkit</div><h2>Finish strong, keep the tools</h2><p>Your certificate unlocks when all ${MODS.length} module tests are passed. The prompt toolkit is yours to use any time and does not affect your progress.</p></div>
+ <div class="grid">
+  <a class="card dark-card xcard" href="#/certificate"><span class="xic">${I('award')}</span><div class="mcard-top"><span class="num">Certificate</span><span class="badge ${eligible()?'ok':''}">${eligible()?'Unlocked':'Locked'}</span></div><h3>Certificate of completion</h3><p class="blurb">Unlocks when all ${MODS.length} module tests are passed. Printable. A course completion certificate, not an accredited qualification.</p></a>
+  <a class="card xcard" href="#/toolkit"><span class="xic">${I('spark')}</span><div class="mcard-top"><span class="num">Prompt toolkit</span>${paid()?'':`<span class="badge pay">Module 1 free</span>`}</div><h3>Prompt builder and library</h3><p class="blurb">Build a prompt in four parts, then copy any of the ${promptCount()} prompts from the course, grouped by module.</p></a>
+ </div></div></section>
+ ${rulesSection()}`;
+}
+function outcomesSection(){
+ return `<section class="block live" id="outcomes"><div class="wrap wide"><div class="live-panel">
+ <div><div class="eyebrow">${I('spark')}What you will be able to do</div>
+ <h2>Get real work done with AI, and trust the result</h2>
+ <p class="lede">Short lessons, prompts you can copy, and checklists you can use the same day. Module 1 is free: the four-part prompt formula and ten prompts that save time this week.</p></div>
+ ${outcomeList()}
+ <div class="live-cta"><a class="btn gold" href="#/m/${MODS[0].id}">${I('arrow')}Start Module 1 free</a><a class="btn ghost" href="#/toolkit">Try the prompt builder</a></div>
+ <p class="live-fine">${FINE} ${INDEP}</p>
+ </div></div></section>`;
+}
+function modulesSection(){
+ return `<section class="block" id="modules"><div class="wrap wide"><div class="section-head"><div class="eyebrow" style="color:var(--gold-d)">Course overview</div><h2>${cap(NUMW[MODS.length])} modules. Everyday AI, done well.</h2><p>Work through the modules in order. Each one has clear objectives and short lessons, and ends with a module test. Pass the test at 70% to complete the module and unlock the next. Pass all ${NUMW[MODS.length]} module tests to earn your certificate of completion, an online course certificate rather than an accredited qualification.${paid()?'':` <b>Module 1 is free.</b> Modules 2 to ${MODS.length}, the full prompt library and the certificate are part of the full course.`}</p></div>
+ <div class="grid">${MODS.map(m=>{const [c,l]=status(m);const np=needsPay(m);const lk=np||!unlocked(m);const ico=c==='ok'?I('check'):c==='lock'?I('lock'):'';return `<a class="card mcard${lk?' locked':''}" href="#/m/${m.id}"><div class="mcard-top"><span class="mnum" aria-hidden="true">${String(m.num).padStart(2,'0')}</span><span class="badge ${c}">${ico}${l}</span></div><span class="num">Module ${m.num}</span><h3>${esc(m.title)}</h3><p class="blurb">${esc(m.blurb)}</p><div class="meta"><span>${I('book')}${m.lessons.length} lessons</span><span>${I('target')}Test · ${mcq(m).length} questions</span><span>${I('clock')}~${dur(m.hours)}</span></div>${meter(modPct(m))}<div class="mfoot"><span>${np?'Part of the full course':lk?`Pass the Module ${m.num-1} test to unlock`:passed(m)?'Module complete':`${modPct(m)}% complete`}</span></div></a>`}).join('')}</div></div></section>`;
+}
+function rulesSection(){
+ return `<section class="block"><div class="wrap wide"><div class="section-head"><div class="eyebrow" style="color:var(--gold-d)">How completion works</div><h2>Clear standards, clear progress</h2></div>
+ <h3>Completing the online course</h3>
+ <ul class="rules"><li><b class="big">70%</b><span>Pass mark for each module test, the final step of every module. Retake it as often as you need; your best score counts.</span></li><li><b class="big">In order</b><span>Modules unlock one at a time. Passing a module test completes that module and unlocks the next.</span></li><li><b class="big">${MODS.length}/${MODS.length}</b><span>Pass all ${MODS.length} module tests to complete the course. Your certificate of completion then unlocks automatically, dated the day you finish.</span></li><li><b class="big">Toolkit</b><span>The prompt builder, prompt library and checklists are there to use any time. They do not affect completion.</span></li></ul>
+ <div class="notice">${I('shield')}<div><b>About your certificate</b><p>${ACCRED}</p></div></div>
+ <p class="small muted" style="margin-top:22px">This course teaches general, practical skills for using AI assistants. It is not legal, financial, medical or IT-security advice, and it does not promise any job, promotion or income outcome. Always follow your employer’s or school’s rules on AI. <button class="btn ghost" style="min-height:34px;padding:4px 12px;font-size:.85rem;margin-left:4px" type="button" data-reset>Reset progress</button></p>
+ </div></section>`;
+}
+function phead(crumbs,title,sub,pct){return `<div class="phead"><div class="wrap"><div class="crumbs">${crumbs}</div><h1>${esc(title)}</h1>${sub?`<p>${sub}</p>`:''}${pct!=null?meter(pct):''}</div></div>`}
+function testStep(m){const b=qbest(m);return `<li><a href="#/m/${m.id}/quiz" class="special"><span class="n">${I('target')}</span><span class="t"><small>Final step</small>Module test · ${mcq(m).length} questions · 70% to pass${b!==null?` · best ${b}%`:''}</span><span class="go">${I('arrow')}</span></a></li>`}
+function modulePage(m){
+ const s=S.seen[m.id]||[]; const [c,l]=status(m); const nm=MODS[m.num];
+ return phead(`<a href="#/">Home</a><span>›</span><span>Module ${m.num} of ${MODS.length}</span>`,m.title,`${esc(m.blurb)}<br><span class="small">${m.lessons.length} lessons · module test (${mcq(m).length} questions) · about ${dur(m.hours)} · <b>${l}</b></span>`,modPct(m))+
+ `<div class="wrap content"><h2 style="margin-top:0">What you will learn</h2><ul class="objectives">${m.objectives.map(o=>`<li>${md(o)}</li>`).join('')}</ul>
+ ${m.intro?`<div class="callout cue"><b class="ct">Before you start</b><p>${md(m.intro)}</p></div>`:''}
+ <h2>Lessons</h2><ul class="lesson-list">${m.lessons.map((ls,i)=>`<li><a href="#/m/${m.id}/l/${i}" class="${s.includes(i)?'seen':''}"><span class="n">${s.includes(i)?I('check'):i+1}</span><span class="t">${esc(ls.title)}</span><span class="go">${I('arrow')}</span></a></li>`).join('')}
+ ${testStep(m)}</ul>
+ <div class="test-end"><div class="eb">${I('target')}End of Module ${m.num}</div><h3>Module test</h3><p>${mcq(m).length} multiple-choice questions on this module. Score 70% or more to complete Module ${m.num}${unlocksTxt(nm)}. Retake as often as you need; your best score counts.${qbest(m)!==null?` Your best so far: <b>${qbest(m)}%</b>.`:''}</p><div class="btn-row" style="margin:0"><a class="btn gold" href="#/m/${m.id}/quiz">${passed(m)?'Review the module test':'Go to the module test'}</a></div></div>
+ <ul class="lesson-list" style="margin-top:14px"><li><a href="#/m/${m.id}/recap"><span class="n">${I('star')}</span><span class="t">Key takeaways (quick review)</span><span class="go">${I('arrow')}</span></a></li>${saq(m).length?`<li><a href="#/m/${m.id}/practice" class="practice"><span class="n">${I('pen')}</span><span class="t">Short-answer practice · ${saq(m).length} question${saq(m).length>1?'s':''} · optional, not scored</span><span class="go">${I('arrow')}</span></a></li>`:''}</ul>
+ <div class="btn-row"><a class="btn" href="#/m/${m.id}/l/${firstUnseen(m)}">${s.length?'Continue lessons':'Start Module '+m.num}</a></div></div>`;
+}
+function lockedPage(m){
+ const pm=MODS[m.num-2], ns=nextStep();
+ return phead(`<a href="#/">Home</a><span>›</span><span>Module ${m.num} of ${MODS.length}</span>`,m.title,`${esc(m.blurb)}<br><span class="small">${m.lessons.length} lessons · module test (${mcq(m).length} questions) · about ${dur(m.hours)} · <b>Locked</b></span>`)+
+ `<div class="wrap content"><div class="callout lock"><b class="ct">Module ${m.num} is locked</b><p>Modules unlock in order. Pass the Module ${pm.num} test (70% or more) to unlock this module.</p></div>
+ <h2>What you will learn</h2><ul class="objectives">${m.objectives.map(o=>`<li>${md(o)}</li>`).join('')}</ul>
+ <div class="btn-row"><a class="btn gold" href="${ns.href}">${esc(ns.label)}</a><a class="btn ghost" href="#/modules">All modules</a></div></div>`;
+}
+function firstUnseen(m){const s=S.seen[m.id]||[];for(let i=0;i<m.lessons.length;i++)if(!s.includes(i))return i;return 0}
+function lessonPage(m,i){
+ const ls=m.lessons[i]; if(!ls) return notFound();
+ S.seen[m.id]=S.seen[m.id]||[]; if(!S.seen[m.id].includes(i)){S.seen[m.id].push(i);save()}
+ const last=i===m.lessons.length-1;
+ const prev=i>0?`#/m/${m.id}/l/${i-1}`:`#/m/${m.id}`;
+ const next=!last?`#/m/${m.id}/l/${i+1}`:`#/m/${m.id}/quiz`;
+ return phead(`<a href="#/">Home</a><span>›</span><a href="#/m/${m.id}">Module ${m.num}</a><span>›</span><span>Lesson ${i+1} of ${m.lessons.length}</span>`,ls.title,`<span class="lesson-kicker"><span>${I('book')}${esc(m.title)}</span><span>${I('list')}Module ${m.num} of ${MODS.length}</span></span>`,Math.round(100*(i+1)/m.lessons.length))+
+ `<div class="wrap content reading">${ls.blocks.map(block).join('')}
+ ${last?`<div class="test-end"><div class="eb">${I('target')}You have reached the end of Module ${m.num}</div><h3>Next: the module test</h3><p>${mcq(m).length} questions · 70% to pass. Review the key takeaways first if you like.</p><div class="btn-row" style="margin:0"><a class="btn gold" href="#/m/${m.id}/quiz">Go to the module test ›</a><a class="btn ghost" style="color:var(--cream);border-color:rgba(244,238,225,.5)" href="#/m/${m.id}/recap">Key takeaways</a></div></div>`:''}
+ <div class="pager"><a class="btn ghost" href="${prev}">‹ ${i>0?'Previous':'Module overview'}</a><a class="btn" href="${next}">${!last?'Next lesson ›':'Module test ›'}</a></div></div>`;
+}
+function recapPage(m){
+ return phead(`<a href="#/">Home</a><span>›</span><a href="#/m/${m.id}">Module ${m.num}</a><span>›</span><span>Key takeaways</span>`,'Key takeaways',esc(m.title))+
+ `<div class="wrap content"><ul class="takeaways">${m.takeaways.map(t=>`<li><span>${md(t)}</span></li>`).join('')}</ul>
+ <div class="callout"><b class="ct">Ready?</b><p>The Module ${m.num} test has ${mcq(m).length} questions. Score 70% or more to complete the module. You will get instant feedback and can retake it as often as you like.</p></div>
+ <div class="pager"><a class="btn ghost" href="#/m/${m.id}/l/${m.lessons.length-1}">‹ Last lesson</a><a class="btn gold" href="#/m/${m.id}/quiz">Start the module test ›</a></div></div>`;
+}
+
+/* ---------- quiz engine ---------- */
+let Q=null, timerId=null;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function newRun(kind,questions,opts){
+ return {kind,opts:opts||{},qs:questions.map(q=>Object.assign({},q,{order:q.options?shuffle(q.options.map((_,k)=>k)):null})),i:0,ans:[],marks:[],revealed:false,done:false,started:Date.now()};
+}
+function quizIntro(m){
+ const b=qbest(m), n=mcq(m).length, nm=MODS[m.num], need=Math.ceil(n*PASS/100);
+ return phead(`<a href="#/">Home</a><span>›</span><a href="#/m/${m.id}">Module ${m.num}</a><span>›</span><span>Module test</span>`,`Module ${m.num} test`,`The final step of ${esc(m.title)}`)+
+ `<div class="wrap content"><div class="test-hero"><ul class="tstats"><li>${I('list')}<b>${n}</b><span>multiple-choice questions, marked automatically</span></li><li>${I('percent')}<b>70%</b><span>to pass (${need} of ${n})</span></li><li>${I('refresh')}<b>${b!==null?b+'%':'Unlimited'}</b><span>${b!==null?'your best so far; retake any time':'retakes; your best score counts'}</span></li></ul>
+ <p>${I('check')} Instant feedback with an explanation after each question.</p><p>${I('arrow')} Passing completes Module ${m.num}${unlocksTxt(nm).replace(' unlock ',' unlocks ')}.${nm&&needsPay(nm)?` Modules 2 to ${MODS.length} are part of the full course.`:''}</p></div>
+ <div class="btn-row"><button class="btn gold" data-start="mod" data-id="${m.id}">${b!==null?'Retake the module test':'Start the module test'} ${I('arrow')}</button><a class="btn ghost" href="#/m/${m.id}/recap">Review key takeaways</a></div>
+ ${saq(m).length?`<p class="small muted">Want to go deeper? Try the <a href="#/m/${m.id}/practice">short-answer practice</a> for this module. It is optional and not scored.</p>`:''}</div>`;
+}
+function msaIntro(m){
+ return phead(`<a href="#/">Home</a><span>›</span><a href="#/m/${m.id}">Module ${m.num}</a><span>›</span><span>Short-answer practice</span>`,`Module ${m.num} short-answer practice`,`${saq(m).length} written question${saq(m).length>1?'s':''} · optional · not scored`)+
+ `<div class="wrap content"><p>Write your answer in full before you reveal the model answer, then mark yourself. These questions are for practice only: they do not count towards your module test or your certificate.</p>
+ <div class="btn-row"><button class="btn gold" data-start="msa" data-id="${m.id}">Start practice</button><a class="btn ghost" href="#/m/${m.id}">Module overview</a></div></div>`;
+}
+function scoreOf(run){let s=0;run.qs.forEach((q,k)=>{s+=run.marks[k]||0});return Math.round(100*s/run.qs.length)}
+function quizView(){
+ const run=Q, q=run.qs[run.i], n=run.qs.length, k=run.i;
+ const instant=run.opts.instant!==false;
+ const ans=run.ans[k];
+ let body='';
+ if(q.options){
+  const locked=instant&&ans!==undefined;
+  body=`<div class="opts" role="group" aria-label="Answer options">${q.order.map((oi,pos)=>{let cls='';if(locked){if(oi===q.answer)cls='right';else if(oi===ans)cls='wrong'}else if(ans===oi)cls='sel';return `<button class="opt ${cls}" data-opt="${oi}" ${locked?'disabled':''}><span class="l">${'ABCD'[pos]}</span><span class="tx">${md(q.options[oi])}</span></button>`}).join('')}</div>`;
+  if(locked){const ok=ans===q.answer;body+=`<div class="fb ${ok?'ok':'no'}" role="status"><b>${ok?'Correct':'Not quite'}</b><p>${ok?'':`The answer is <strong>${md(q.options[q.answer].replace(/\.$/,''))}</strong>. `}${md(q.explain||'')}</p></div>`}
+ } else {
+  const val=run.ans[k]||'';
+  body=`<label class="sr" for="sa">Your answer</label><textarea id="sa" placeholder="Write your answer here, then reveal the model answer.">${esc(val)}</textarea>`;
+  if(!run.revealed){body+=`<div class="btn-row" style="margin-bottom:16px"><button class="btn ghost" data-reveal>Reveal model answer</button></div>`}
+  else{body+=`<div class="fb neutral"><b>Model answer</b><p>${md(q.model)}</p></div><p class="small muted">How did you do? Mark yourself honestly.</p><div class="selfmark">${[[1,'Got it'],[.5,'Partly'],[0,'Missed it']].map(([v,l])=>`<button class="btn ${run.marks[k]===v?'':'ghost'}" data-mark="${v}">${l}</button>`).join('')}</div>`}
+ }
+ const answered=q.options?ans!==undefined:(run.revealed&&run.marks[k]!==undefined);
+ const last=k===n-1;
+ return `${run.opts.timed?`<div class="timer" id="timer" aria-live="off"></div>`:''}<div class="wrap content">
+ <div class="qhead"><span>${esc(run.opts.title)}</span><span>Question ${k+1} of ${n}</span></div>${meter(Math.round(100*k/n))}
+ <p class="qstem">${md(q.q)}</p>${body}
+ <div class="pager" style="margin-top:10px">${!instant&&k>0?`<button class="btn ghost" data-prev>‹ Previous</button>`:`<button class="btn ghost" data-quit>Exit</button>`}<button class="btn" data-next ${answered?'':'disabled'}>${last?'See my result':'Next question ›'}</button></div></div>`;
+}
+function resultView(){
+ const run=Q, sc=scoreOf(run), pass=sc>=PASS, practice=run.kind!=='mod';
+ const raw=run.qs.reduce((a,_,k)=>a+(run.marks[k]||0),0);
+ const m=(run.kind==='mod'||run.kind==='msa')?byId(run.opts.id):null; const nm=m?MODS[m.num]:null;
+ const backHref=m?`#/m/${m.id}`:'#/';
+ let msg='', next='';
+ if(run.kind==='mod'){
+  if(pass&&nm&&needsPay(nm)){msg=`Module ${m.num} complete. Well done! Unlock the full course to continue with Module&nbsp;${nm.num}.`;next=`<a class="btn gold" href="#/unlock">${I('lock')}Unlock the full course</a>`}
+  else if(pass&&nm){msg=`Module ${m.num} complete. Module ${nm.num} is now unlocked.`;next=`<a class="btn gold" href="#/m/${nm.id}">Start Module ${nm.num} ${I('arrow')}</a>`}
+  else if(pass){msg=`All ${MODS.length} modules complete. Your certificate of completion is ready.`;next=`<a class="btn gold" href="#/certificate">Claim your certificate ›</a><a class="btn ghost" href="#/toolkit">Open your prompt toolkit</a>`}
+  else msg='Not quite there yet. Review the lessons and try again; you need 70%.';
+ }
+ else if(run.kind==='final') msg=(pass?'A score of 70% or more shows you are ready across the whole course.':'Below 70%. Review the modules where you dropped marks and try again.')+' This is practice only and does not affect your certificate.';
+ else msg='Practice complete. This set does not count towards completion.';
+ const rcls=run.kind==='mod'||run.kind==='final'?(pass?'pass':'fail'):'pass';
+ const head=run.kind==='mod'?(pass?(nm?'Module passed':'Course complete'):'Not passed yet'):run.kind==='final'?'Practice final complete':'Practice complete';
+ return `<div class="wrap content"><div class="result-card ${rcls}"><div class="rc-eb">${pass||practice?I(run.kind==='mod'?'award':'check'):I('refresh')}${esc(run.opts.title)}</div><h2>${head}</h2>
+ <div class="score"><div class="ring ${practice&&run.kind!=='final'?'pass':(pass?'pass':'fail')}" style="--p:${sc}%"><span>${sc}%</span></div><div><p style="margin:0 0 4px"><b>${raw} of ${run.qs.length}</b> marks${run.kind==='mod'?` · 70% needed`:''}${run.timeUp?' · time ran out':''}</p><p style="margin:0">${msg}</p></div></div>
+ <div class="btn-row">${next}<button class="btn ${pass||practice?'ghost':''}" data-retake>Retake</button><a class="btn ghost" href="${backHref}">${m?'Module overview':'Home'}</a></div></div>
+ <h2>Review your answers</h2><ul class="review">${run.qs.map((q,k)=>{const a=run.ans[k];let r='';if(q.options){const ok=a===q.answer;r=`<div class="ra"><span class="${ok?'ok':'no'}">${ok?'✓ Correct':'✗ '+(a===undefined?'Not answered':'Your answer: '+md(q.options[a]))}</span>${ok?'':`<br>Correct answer: <strong>${md(q.options[q.answer])}</strong>`}<br><span class="muted">${md(q.explain||'')}</span></div>`}else{r=`<div class="ra"><span class="${(run.marks[k]||0)>=1?'ok':'no'}">Self-marked: ${run.marks[k]===undefined?'0':run.marks[k]} / 1</span><br><span class="muted">${md(q.model)}</span></div>`}return `<li><div class="rq">${k+1}. ${md(q.q)}</div>${r}</li>`}).join('')}</ul></div>`;
+}
+function finishRun(){
+ const run=Q; run.done=true; stopTimer();
+ const sc=scoreOf(run);
+ if(run.kind==='mod'){const r=S.quiz[run.opts.id]||{best:null,attempts:0};r.attempts++;r.last=sc;r.best=r.best===null?sc:Math.max(r.best,sc);S.quiz[run.opts.id]=r}
+ if(run.kind==='final'){const r=S.final||{best:0,attempts:0};r.attempts++;r.last=sc;r.best=Math.max(r.best,sc);S.final=r}
+ if(run.kind==='written'){S.written={last:sc}}
+ if(eligible()&&!S.completedOn)S.completedOn=new Date().toISOString();
+ save(); render();
+}
+function startTimer(){stopTimer();Q.deadline=Date.now()+50*60*1000;tick();timerId=setInterval(tick,1000)}
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null}}
+function tick(){if(!Q||!Q.opts.timed)return;const left=Math.max(0,Q.deadline-Date.now());const el=document.getElementById('timer');const mm=Math.floor(left/60000),ss=Math.floor(left%60000/1000);if(el){el.textContent=`Time remaining ${mm}:${String(ss).padStart(2,'0')}`;el.classList.toggle('low',left<5*60000)}if(left<=0&&!Q.done){Q.timeUp=true;finishRun()}}
+
+function certPage(){
+ if(!eligible()) return phead(`<a href="#/">Home</a><span>›</span><span>Certificate</span>`,'Certificate of completion',`Pass all ${MODS.length} module tests to unlock your certificate (${MODS.filter(passed).length} of ${MODS.length} passed).`)+
+  `<div class="wrap content"><ul class="check">${MODS.map(m=>{const d=passed(m);return `<li class="${d?'done':''}"><i>${d?'✓':''}</i><div>Module ${m.num} test: ${esc(m.title)}${d?` · passed ${qbest(m)}%`:''}</div></li>`}).join('')}</ul><div class="notice" style="margin-bottom:18px">${I('shield')}<div><b>About your certificate</b><p>${ACCRED}</p></div></div><div class="btn-row"><a class="btn gold" href="${nextStep().href}">${esc(nextStep().label)}</a></div></div>`;
+ const d=new Date(S.completedOn||Date.now()).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+ return `<div class="no-print">${phead(`<a href="#/">Home</a><span>›</span><span>Certificate</span>`,'Congratulations',`<span class="congrats">${MEDAL}<span>You have passed all ${MODS.length} module tests and completed AI at Work.</span></span>`)}</div>
+ <div class="wrap content"><div class="no-print"><label for="nm"><b>Your name as it should appear</b></label><input type="text" id="nm" maxlength="60" value="${esc(S.name)}" placeholder="Enter your full name" autocomplete="name"></div>
+ <div class="cert" id="cert"><div class="cert-in">${CORNER('tl')}${CORNER('tr')}${CORNER('bl')}${CORNER('br')}${SEAL}<div class="c-kicker">Online course · Everyday AI skills</div><h2>Certificate of Completion</h2><p class="c-to">Presented to</p><div class="c-name" id="certName">${esc(S.name||'Your name')}</div><p class="c-body">for successfully completing all ${MODS.length} modules and module tests of the online course</p><p class="c-course">AI at Work: Everyday AI Assistant Skills · Course King</p><div class="c-foot"><div><b>${d}</b>Date of completion</div><div><b>Course King</b>Issued by</div></div><p class="c-note" id="certNote"><b>Online course certificate</b>${ACCRED}</p></div></div>
+ <div class="btn-row no-print"><button class="btn" data-print>Print or save as PDF</button><a class="btn ghost" href="#/">Back to the course</a></div>
+ <div class="book-box cert-cta no-print"><div class="eb">${I('spark')}Keep your skills sharp</div><h2>Make AI a habit</h2><p>Your prompt toolkit stays open on this device. Keep using the four-part formula, check what matters, and review your privacy settings and saved prompts every few months.</p><div class="live-cta"><a class="btn gold" href="#/toolkit">Open your prompt toolkit</a><a class="btn ghost" style="color:var(--cream);border-color:rgba(244,238,225,.5)" href="#/m/${MODS[MODS.length-1].id}/l/${MODS[MODS.length-1].lessons.length-1}">Your 30-day habit plan</a></div></div></div>`;
+}
+function paywallPage(ctx){
+ const m=ctx&&ctx.m, m1=MODS[0], m1done=passed(m1);
+ const crumbs=`<a href="#/">Home</a><span>›</span><span>${m?`Module ${m.num} of ${MODS.length}`:'Full course'}</span>`;
+ if(paid()) return phead(crumbs,'Full course unlocked',`All ${MODS.length} modules, the full prompt library and your certificate are open on this device.`)+
+  `<div class="wrap content"><div class="result-card pass"><div class="rc-eb">${I('check')}Full course access</div><h2>You’re all set</h2><p>Thanks for buying AI at Work. Work through the modules in order and pass each module test at 70% to move on.</p><div class="btn-row"><a class="btn gold" href="${nextStep().href}">${esc(nextStep().label)} ${I('arrow')}</a><a class="btn ghost" href="#/modules">All modules</a></div></div>
+  <div class="pw-key"><h3>Your license key</h3><p class="muted">Keep it safe. Enter it to unlock the course on another phone or computer. It is also in your Gumroad receipt email.</p><div class="pw-keybox" id="pwSavedKey">${esc(LIC.key)}</div></div></div>`;
+ const rest=MODS.slice(1), restLessons=rest.reduce((a,x)=>a+x.lessons.length,0);
+ const why=m?`Module ${m.num}, ${esc(m.title)}, is part of the full course.`:ctx&&ctx.label?`${esc(ctx.label)} ${ctx.plural?'are':'is'} part of the full course.`:m1done?'You’ve passed Module 1. Unlock the full course to keep going.':`Module 1 is free. Unlock the full course for Modules 2 to ${MODS.length}, the full prompt library and your certificate.`;
+ const pts=[['book',`<b>${rest.length} more modules</b>, ${restLessons} short lessons: prompting, writing, research and fact-checking, planning, spreadsheets and files, privacy and your own AI toolkit`],
+  ['target','<b>A module test at the end of each one</b>, with instant feedback and an explanation for every question'],
+  ['spark',`<b>The full prompt library</b>: all ${promptCount()} prompts, ready to copy, plus a checklist in every module`],
+  ['award',`<b>Certificate of completion</b> when you pass all ${MODS.length} module tests (not an accredited qualification)`],
+  ['phone','<b>Your own license key</b>, emailed by Gumroad, to unlock the course on your devices']];
+ const price=`<div class="pw-price" data-price><span class="now">${esc(COURSE_PRICE)}</span></div><p class="pw-once">One-time payment for the full course.</p>`;
+ const buy=SALES_OPEN?`${price}<a class="btn gold pw-buy" href="${esc(BUY_URL)}" data-buy target="_blank" rel="noopener">${I('tag')}Buy the full course · ${esc(COURSE_PRICE)}</a><p class="pw-note">Secure checkout by Gumroad. Your license key arrives by email right after you buy. Come back here and enter it below.</p><button type="button" class="btn ghost pw-have" data-havekey>${I('lock')}I have a license key</button>`
+  :`${price}<span class="btn gold pw-buy is-soon" aria-disabled="true" data-buy-soon>${I('clock')}Purchase opens soon</span><p class="pw-note">The full course is almost ready to buy. ${m1done?'Your Module 1 result is saved on this device.':'Start with Module 1 for free in the meantime.'}</p>`;
+ const dis=SALES_OPEN?'':' disabled';
+ return phead(crumbs,'Unlock the full course',why)+
+ `<div class="wrap content">${m1done?`<div class="pw-done">${I('check')}<span>Module 1 passed with ${qbest(m1)}%. Great start.</span></div>`:''}
+ <div class="pw-card"><div class="eb">${I('award')}Full course access</div><h2>Keep going with Modules 2&nbsp;to&nbsp;${MODS.length}</h2>
+ <ul class="pw-list">${pts.map(([ic,tx])=>`<li><span class="pi">${I(ic)}</span><span class="pt">${tx}</span></li>`).join('')}</ul>${buy}</div>
+ <div class="pw-key" id="pwKey"><h3>Already bought it?</h3><p class="muted">Enter the license key from your Gumroad receipt email to unlock the full course on this device.</p>
+ <form id="pwForm" novalidate><label class="sr" for="pwInput">License key</label><div class="pw-row"><input type="text" id="pwInput" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Paste your license key"${dis}><button class="btn" type="submit" id="pwSubmit"${dis}>${I('lock')}Unlock</button></div>
+ <p class="pw-status${SALES_OPEN?'':' info'}" id="pwStatus" role="status" aria-live="polite">${SALES_OPEN?'':`${I('info')}<span>Key entry opens when the course goes on sale.</span>`}</p></form></div>
+ <div class="notice" style="margin-bottom:18px">${I('shield')}<div><b>Good to know</b><p>Your key is saved on this device, so the course stays unlocked even when you are offline. On a new phone or computer, enter the same key again. Your progress is saved separately on each device.</p></div></div>
+ <div class="btn-row">${m1done?`<a class="btn ghost" href="#/m/${m1.id}">Review Module 1</a>`:`<a class="btn ghost" href="${nextStep().href}">${esc(nextStep().label.replace('Start Module 1','Start Module 1 for free'))}</a>`}<a class="btn ghost" href="#/modules">All modules</a></div></div>`;
+}
+function toolkitPage(){
+ const groups=allPrompts();
+ return phead(`<a href="#/">Home</a><span>›</span><span>Prompt toolkit</span>`,'Prompt toolkit',`The prompt builder and all ${promptCount()} prompts from the course, ready to copy. Replace the parts in [square brackets] with your own details.`)+
+ `<div class="wrap content">${builder()}
+ <h2>Prompt library</h2>
+ <p class="muted">Before you paste anything into an AI tool, remove names and private details, and follow your workplace or school rules (Module 7).</p>
+ ${groups.map(({m,ps})=>!ps.length?'':`<section class="tk-group" id="tk-${m.id}"><h3 class="tk-h"><span class="tk-n">Module ${m.num}</span>${esc(m.title)}</h3>${needsPay(m)?`<div class="tk-lock">${I('lock')}<span><b>${ps.length} prompt${ps.length>1?'s':''}</b> from this module ${ps.length>1?'are':'is'} part of the full course.</span><a class="btn ghost" href="#/unlock">Unlock</a></div>`:ps.map(block).join('')}</section>`).join('')}
+ </div>`;
+}
+function money(s){const n=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isNaN(n)?0:n}
+function pwSet(cls,html){const s=document.getElementById('pwStatus');if(s){s.className='pw-status '+cls;s.innerHTML=html}}
+let PW_BUSY=false;
+async function doUnlock(){
+ if(PW_BUSY)return;const inp=document.getElementById('pwInput'),btn=document.getElementById('pwSubmit');if(!inp)return;
+ if(!SALES_OPEN){pwSet('info',`${I('info')}<span>${PW_MSG.closed}</span>`);return}
+ const key=cleanKey(inp.value);inp.classList.remove('bad');
+ if(!key){inp.classList.add('bad');pwSet('err',`${I('alert')}<span>${PW_MSG.empty}</span>`);inp.focus();return}
+ PW_BUSY=true;inp.disabled=true;btn.disabled=true;btn.innerHTML='<span class="spin" aria-hidden="true"></span>Checking…';
+ pwSet('busy','<span class="spin" aria-hidden="true"></span><span>Checking your key with Gumroad…</span>');
+ const r=await verifyKey(key,true);PW_BUSY=false;
+ if(r.ok){LIC={key,pid:TEST_MODE?'test':GUMROAD_PRODUCT_ID,test:TEST_MODE||undefined,email:(r.purchase&&r.purchase.email)||'',activated:Date.now(),checked:Date.now()};saveLic();
+  pwSet('ok',`${I('check')}<span>Key accepted. The full course is unlocked.</span>`);btn.innerHTML=`${I('check')}Unlocked`;setTimeout(()=>{render();window.scrollTo(0,0)},900);return}
+ inp.disabled=false;btn.disabled=false;btn.innerHTML=`${I('lock')}Unlock`;
+ if(r.reason==='invalid'||r.reason==='refunded'||r.reason==='devices')inp.classList.add('bad');
+ pwSet('err',`${I('alert')}<span>${PW_MSG[r.reason]||PW_MSG.server}</span>`);inp.focus();
+}
+function notFound(){return `<div class="wrap content"><h1>Page not found</h1><a class="btn" href="#/">Go home</a></div>`}
+
+/* ---------- router ---------- */
+function render(){
+ const h=location.hash.replace(/^#\/?/,'');const p=h.split('/');
+ let html='';
+ if(Q&&p[0]!=='run'){Q=null;stopTimer()}
+ if(Q&&!Q.done&&p[0]==='run'){html=quizView()}
+ else if(Q&&Q.done&&p[0]==='run'){html=resultView()}
+ else if(!h)html=home();
+ else if(p[0]==='modules')html=`<div class="content"></div>`+modulesSection();
+ else if(p[0]==='unlock'||p[0]==='key')html=paywallPage(null);
+ else if(p[0]==='m'){const m=byId(p[1]);if(!m)html=notFound();else if(needsPay(m))html=paywallPage({m});else if(!unlocked(m))html=lockedPage(m);else if(p[2]==='practice')html=msaIntro(m);else if(!p[2])html=modulePage(m);else if(p[2]==='l')html=lessonPage(m,parseInt(p[3],10));else if(p[2]==='recap')html=recapPage(m);else if(p[2]==='quiz')html=quizIntro(m);else html=notFound()}
+ else if(p[0]==='about')html=aboutPage();
+ else if(p[0]==='toolkit')html=toolkitPage();
+ else if(p[0]==='certificate')html=paid()?certPage():paywallPage({label:'Your certificate of completion'});
+ else if(p[0]==='run')html=notFound();
+ else html=notFound();
+ $app.innerHTML=`<main class="${ENTER?'enter':''}">${html}</main>`;ENTER=false;
+ $app.querySelectorAll('.callout b.ct').forEach(b=>{if(b.querySelector('svg'))return;const c=b.parentNode.classList;b.insertAdjacentHTML('afterbegin',I(c.contains('lock')?'lock':c.contains('warn')?'alert':c.contains('cue')?'info':c.contains('tip')?'bulb':'star'))});
+ if(Q&&Q.opts.timed&&!Q.done&&p[0]==='run')tick();
+ const nu=document.getElementById('navUnlock');if(nu)nu.textContent=paid()?'Your course access':'Unlock the full course';const nk=document.getElementById('navKey');if(nk)nk.hidden=paid();
+ growAll($app);
+ if(p[0]==='key')setTimeout(focusKey,60);
+ closeMenu();
+}
+function go(hash){if(location.hash===hash)render();else location.hash=hash}
+let ENTER=true;
+window.addEventListener('hashchange',()=>{ENTER=true;render();window.scrollTo(0,0)});
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+ const t=e.target.closest('button,[data-start]');if(!t)return;
+ if(t.id==='menuBtn'){const d=document.getElementById('drawer');const o=!d.classList.contains('open');d.classList.toggle('open',o);t.setAttribute('aria-expanded',o);return}
+ if(t.id==='resetBtn'||t.hasAttribute('data-reset')){if(confirm('Reset all progress, test scores, checklists and your certificate? This cannot be undone.')){S={seen:{},quiz:{},checks:{},builder:{},name:'',completedOn:null};save();Q=null;stopTimer();go('#/')}return}
+ if(t.dataset.start){const k=t.dataset.start;
+  if(k==='mod'){const m=byId(t.dataset.id);if(!m||needsPay(m)||!unlocked(m))return;Q=newRun('mod',mcq(m),{id:m.id,title:`Module ${m.num} test`,instant:true})}
+  if(k==='msa'){const m=byId(t.dataset.id);if(!m||needsPay(m)||!unlocked(m))return;Q=newRun('msa',saq(m),{id:m.id,title:`Module ${m.num} short-answer practice`,instant:true})}
+  if(!Q)return;
+  go('#/run');window.scrollTo(0,0);return}
+ if(!Q)return;
+ if(t.dataset.opt!==undefined&&!t.disabled){const oi=+t.dataset.opt;const q=Q.qs[Q.i];Q.ans[Q.i]=oi;Q.marks[Q.i]=oi===q.answer?1:0;render();if(Q.opts.instant!==false){const fb=document.querySelector('.fb');if(fb)fb.scrollIntoView({block:'nearest',behavior:'smooth'})}return}
+ if(t.hasAttribute('data-reveal')){const ta=document.getElementById('sa');Q.ans[Q.i]=ta?ta.value:'';Q.revealed=true;render();return}
+ if(t.dataset.mark!==undefined){const ta=document.getElementById('sa');if(ta)Q.ans[Q.i]=ta.value;Q.marks[Q.i]=parseFloat(t.dataset.mark);render();return}
+ if(t.hasAttribute('data-next')){if(Q.i<Q.qs.length-1){Q.i++;Q.revealed=false;render();window.scrollTo(0,0)}else finishRun();return}
+ if(t.hasAttribute('data-prev')){if(Q.i>0){Q.i--;render();window.scrollTo(0,0)}return}
+ if(t.hasAttribute('data-quit')){if(confirm('Leave this attempt? Your answers will not be saved.')){const back=Q.kind==='mod'?`#/m/${Q.opts.id}/quiz`:`#/m/${Q.opts.id}/practice`;Q=null;stopTimer();go(back)}return}
+ if(t.hasAttribute('data-retake')){const k=Q.kind;const id=Q.opts.id;Q=null;go(k==='mod'?`#/m/${id}/quiz`:`#/m/${id}/practice`);return}
+});
+document.addEventListener('click',e=>{if(e.target.closest('[data-print]'))window.print()});
+/* ---------- interactive blocks: copy, prompt builder, checklists ---------- */
+function copyText(txt,btn){const lab=btn.querySelector('span')||btn;const done=ok=>{lab.textContent=ok?'Copied':'Select and copy';btn.classList.toggle('done',ok);clearTimeout(btn._t);btn._t=setTimeout(()=>{lab.textContent='Copy';btn.classList.remove('done')},1800)};
+ const fallback=()=>{const ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0;pointer-events:none';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(err){}document.body.removeChild(ta);done(ok)};
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(()=>done(true),fallback)}else fallback()}
+function syncBuilder(root){const p=buildPrompt(S.builder);const o=root.querySelector('[data-bout]');const c=root.querySelector('[data-copy-builder]');if(o)o.innerHTML=p?esc(p):'<span class="muted">Your prompt will appear here as you type.</span>';if(c)c.disabled=!p}
+document.addEventListener('click',e=>{
+ const c=e.target.closest('[data-copy]');if(c){copyText(c.closest('.prompt').querySelector('.pr-body').textContent,c);return}
+ const cb=e.target.closest('[data-copy-ba]');if(cb){copyText(cb.closest('.ba-row').querySelector('.ba-x').textContent,cb);return}
+ if(e.target.closest('[data-havekey]')){focusKey();return}
+ const bb=e.target.closest('[data-copy-builder]');if(bb){const p=buildPrompt(S.builder);if(p)copyText(p,bb);return}
+ const ch=e.target.closest('[data-chip]');if(ch){const root=ch.closest('[data-builder]');const f=root.querySelector('[data-bf="format"]');const add=ch.dataset.chip;const cur=f.value.trim().replace(/[.,;]$/,'');
+  if(cur.toLowerCase().indexOf(add.toLowerCase())<0)f.value=cur?cur+', '+add.charAt(0).toLowerCase()+add.slice(1):add;S.builder=Object.assign({},S.builder,{format:f.value});save();syncBuilder(root);return}
+ const br=e.target.closest('[data-breset]');if(br){S.builder={};save();const root=br.closest('[data-builder]');root.querySelectorAll('[data-bf]').forEach(x=>x.value='');growAll(root);syncBuilder(root);return}
+ const bx=e.target.closest('[data-bexample]');if(bx){const root=bx.closest('[data-builder]');S.builder={};BFIELDS.forEach(([k,,,ph])=>{S.builder[k]=ph;const f=root.querySelector(`[data-bf="${k}"]`);if(f)f.value=ph});save();growAll(root);syncBuilder(root);return}
+});
+function grow(el){if(!el||el.tagName!=='TEXTAREA')return;el.style.height='auto';el.style.height=(el.scrollHeight+3)+'px'}
+function focusKey(){const k=document.getElementById('pwKey');if(!k)return;k.scrollIntoView({block:'center'});const i=document.getElementById('pwInput');if(i&&!i.disabled)i.focus({preventScroll:true})}
+function growAll(root){(root||document).querySelectorAll('textarea[data-bf]').forEach(grow)}
+window.addEventListener('resize',()=>growAll());
+document.addEventListener('input',e=>{const f=e.target.closest('[data-bf]');if(!f)return;grow(f);S.builder=Object.assign({},S.builder,{[f.dataset.bf]:f.value.slice(0,1200)});save();syncBuilder(f.closest('[data-builder]'))});
+document.addEventListener('change',e=>{const x=e.target;if(!x.matches('[data-ck]'))return;const id=x.dataset.ck,i=+x.dataset.i;let a=(S.checks[id]||[]).filter(n=>n!==i);if(x.checked)a.push(i);a.sort((p,q)=>p-q);S.checks[id]=a;save();
+ const box=x.closest('[data-checklist]');const n=box.querySelectorAll('[data-ck]').length;const cc=box.querySelector('[data-ckc]');if(cc)cc.textContent=`${a.length} of ${n}`;box.classList.toggle('all',a.length===n)});
+document.addEventListener('submit',e=>{if(e.target.id==='pwForm'){e.preventDefault();doUnlock()}});
+document.addEventListener('input',e=>{if(e.target.id==='pwInput'&&e.target.classList.contains('bad')){e.target.classList.remove('bad');pwSet('','')}});
+document.addEventListener('input',e=>{if(e.target.id==='nm'){S.name=e.target.value.slice(0,60);save();const c=document.getElementById('certName');if(c)c.textContent=S.name||'Your name'}});
+function closeMenu(){const d=document.getElementById('drawer');d.classList.remove('open');document.getElementById('menuBtn').setAttribute('aria-expanded','false')}
+document.getElementById('drawer').addEventListener('click',e=>{if(e.target.tagName==='A')closeMenu()});
+if(location.hash.indexOf('#/run')===0)location.hash='#/';
+render();
+recheckLicense();
+window.__AIW={DATA,state:()=>S,license:()=>LIC,paid:()=>paid(),testMode:TEST_MODE};
+if(TEST_MODE){window.__AIW.testUnlock=()=>{LIC={key:'TEST-VALID',pid:'test',test:true,activated:Date.now(),checked:Date.now()};saveLic();render()};window.__AIW.testLock=()=>{LIC=null;saveLic();render()}}
+})();
+</script>
+</body>
+</html>
